@@ -1388,19 +1388,23 @@
 
   <!-- ===== AÑADIDO: RECIBO "TE YAPEARON" EDITABLE DESDE EL MENÚ ===== -->
   <script>
-    // Añadir opción "Editar Te yapearon" al menú sin tocar HTML original
-    const menuItems = document.querySelector('.menu-sidebar');
-    const newItem = document.createElement('div');
-    newItem.className = 'menu-item';
-    newItem.onclick = () => showScreen('editReceive');
-    newItem.innerHTML = `
-      <i class="fas fa-exchange-alt"></i>
-      <div>
-        <div class="label">Editar "Te yapearon"</div>
-        <div class="desc">Personaliza el recibo</div>
-      </div>
-    `;
-    menuItems.appendChild(newItem);
+    // Añadir opción al menú de 3 rayas
+    document.addEventListener('DOMContentLoaded', () => {
+      const menu = document.getElementById('menuSidebar');
+      if (menu) {
+        const item = document.createElement('div');
+        item.className = 'menu-item';
+        item.onclick = () => showScreen('editReceive');
+        item.innerHTML = `
+          <i class="fas fa-exchange-alt"></i>
+          <div>
+            <div class="label">Editar "Te yapearon"</div>
+            <div class="desc">Personaliza el recibo</div>
+          </div>
+        `;
+        menu.appendChild(item);
+      }
+    });
   </script>
 
   <!-- RECIBO: Te yapearon -->
@@ -1414,24 +1418,24 @@
       </button>
       <div class="confirm-title">¡Te yapearon!</div>
       <div class="confirm-amount">S/ <span id="receiveAmount">100.00</span></div>
-      <div class="confirm-name"><span id="receiveName">Luis Gómez</span></div>
+      <div class="confirm-name"><span id="receiveName">Carlos Ruiz</span></div>
       <div class="confirm-date">
-        <i class="fas fa-calendar"></i> <span id="receiveDate">23 ago. 2025</span> | 
-        <i class="fas fa-clock"></i> <span id="receiveTime">09:15 a.m.</span>
+        <i class="fas fa-calendar"></i> <span id="receiveDate">24 ago. 2025</span> | 
+        <i class="fas fa-clock"></i> <span id="receiveTime">11:20 a.m.</span>
       </div>
       <div class="security-code">
         <span>CÓDIGO DE SEGURIDAD</span>
         <i class="fas fa-info-circle"></i>
         <div class="security-digits">
-          <div class="digit" id="rcvCode1">3</div>
-          <div class="digit" id="rcvCode2">7</div>
-          <div class="digit" id="rcvCode3">1</div>
+          <div class="digit" id="rcvCode1">5</div>
+          <div class="digit" id="rcvCode2">2</div>
+          <div class="digit" id="rcvCode3">8</div>
         </div>
       </div>
       <div class="confirm-details">
         <div class="detail-row">
           <span>Nro. de celular</span>
-          <span id="receivePhone">*** *** 456</span>
+          <span id="receivePhone">*** *** 555</span>
         </div>
         <div class="detail-row">
           <span>Origen</span>
@@ -1439,7 +1443,7 @@
         </div>
         <div class="detail-row">
           <span>Nro. de operación</span>
-          <span id="receiveOp">87654321</span>
+          <span id="receiveOp">12345678</span>
         </div>
       </div>
     </div>
@@ -1453,27 +1457,27 @@
     <h2 style="color:var(--yape-purple); margin:20px 0;">Editar "Te yapearon"</h2>
     <div style="margin:15px 0;">
       <label style="display:block; margin-bottom:8px; color:#333;">Nombre del que te yapeó</label>
-      <input type="text" id="editReceiveName" value="Luis Gómez" style="width:100%; padding:12px; border-radius:8px; border:1px solid #e0e0e0; font-size:1em;">
+      <input type="text" id="editReceiveName" style="width:100%; padding:12px; border-radius:8px; border:1px solid #e0e0e0; font-size:1em;">
     </div>
     <div style="margin:15px 0;">
       <label style="display:block; margin-bottom:8px; color:#333;">Monto (S/)</label>
-      <input type="number" step="0.01" id="editReceiveAmount" value="100.00" style="width:100%; padding:12px; border-radius:8px; border:1px solid #e0e0e0; font-size:1em;">
+      <input type="number" step="0.01" id="editReceiveAmount" style="width:100%; padding:12px; border-radius:8px; border:1px solid #e0e0e0; font-size:1em;">
     </div>
     <div style="margin:15px 0;">
       <label style="display:block; margin-bottom:8px; color:#333;">Últimos 3 dígitos del número</label>
-      <input type="text" id="editReceivePhone" value="456" maxlength="3" style="width:100%; padding:12px; border-radius:8px; border:1px solid #e0e0e0; font-size:1em;">
+      <input type="text" id="editReceivePhone" maxlength="3" style="width:100%; padding:12px; border-radius:8px; border:1px solid #e0e0e0; font-size:1em;">
     </div>
     <div style="margin:15px 0;">
       <label style="display:block; margin-bottom:8px; color:#333;">Código de seguridad</label>
       <div style="display:flex; gap:10px;">
-        <input type="text" id="editRcvCode1" value="3" maxlength="1" style="width:50px; text-align:center; font-size:1.2em; font-weight:bold;">
-        <input type="text" id="editRcvCode2" value="7" maxlength="1" style="width:50px; text-align:center; font-size:1.2em; font-weight:bold;">
-        <input type="text" id="editRcvCode3" value="1" maxlength="1" style="width:50px; text-align:center; font-size:1.2em; font-weight:bold;">
+        <input type="text" id="editRcvCode1" maxlength="1" style="width:50px; text-align:center; font-size:1.2em; font-weight:bold;">
+        <input type="text" id="editRcvCode2" maxlength="1" style="width:50px; text-align:center; font-size:1.2em; font-weight:bold;">
+        <input type="text" id="editRcvCode3" maxlength="1" style="width:50px; text-align:center; font-size:1.2em; font-weight:bold;">
       </div>
     </div>
     <div style="margin:15px 0;">
       <label style="display:block; margin-bottom:8px; color:#333;">Número de operación</label>
-      <input type="text" id="editReceiveOp" value="87654321" style="width:100%; padding:12px; border-radius:8px; border:1px solid #e0e0e0; font-size:1em;">
+      <input type="text" id="editReceiveOp" style="width:100%; padding:12px; border-radius:8px; border:1px solid #e0e0e0; font-size:1em;">
     </div>
     <button class="big-button" onclick="saveReceiveData()">Guardar Cambios</button>
     <button class="big-button secondary" style="margin-top:10px;" onclick="goBack()">← Volver</button>
@@ -1482,25 +1486,25 @@
   <!-- SCRIPT: Funcionalidad "Te yapearon" -->
   <script>
     let receiveData = JSON.parse(localStorage.getItem('yape_receive_data')) || {
-      name: 'Luis Gómez',
+      name: 'Carlos Ruiz',
       amount: '100.00',
-      phone: '456',
-      code: ['3','7','1'],
-      operation: '87654321',
-      date: '23 ago. 2025',
-      time: '09:15 a.m.'
+      phone: '555',
+      code: ['5', '2', '8'],
+      operation: '12345678',
+      date: '24 ago. 2025',
+      time: '11:20 a.m.'
     };
 
     function loadReceiveData() {
-      document.getElementById('receiveAmount').textContent = receiveData.amount;
-      document.getElementById('receiveName').textContent = receiveData.name;
-      document.getElementById('receivePhone').textContent = `*** *** ${receiveData.phone}`;
-      document.getElementById('rcvCode1').textContent = receiveData.code[0];
-      document.getElementById('rcvCode2').textContent = receiveData.code[1];
-      document.getElementById('rcvCode3').textContent = receiveData.code[2];
-      document.getElementById('receiveOp').textContent = receiveData.operation;
-      document.getElementById('receiveDate').textContent = receiveData.date;
-      document.getElementById('receiveTime').textContent = receiveData.time;
+      if (document.getElementById('receiveAmount')) document.getElementById('receiveAmount').textContent = receiveData.amount;
+      if (document.getElementById('receiveName')) document.getElementById('receiveName').textContent = receiveData.name;
+      if (document.getElementById('receivePhone')) document.getElementById('receivePhone').textContent = `*** *** ${receiveData.phone}`;
+      if (document.getElementById('rcvCode1')) document.getElementById('rcvCode1').textContent = receiveData.code[0];
+      if (document.getElementById('rcvCode2')) document.getElementById('rcvCode2').textContent = receiveData.code[1];
+      if (document.getElementById('rcvCode3')) document.getElementById('rcvCode3').textContent = receiveData.code[2];
+      if (document.getElementById('receiveOp')) document.getElementById('receiveOp').textContent = receiveData.operation;
+      if (document.getElementById('receiveDate')) document.getElementById('receiveDate').textContent = receiveData.date;
+      if (document.getElementById('receiveTime')) document.getElementById('receiveTime').textContent = receiveData.time;
 
       if (document.getElementById('editReceiveName')) {
         document.getElementById('editReceiveName').value = receiveData.name;
@@ -1514,23 +1518,23 @@
     }
 
     function saveReceiveData() {
-      const name = document.getElementById('editReceiveName').value.trim();
-      const amount = document.getElementById('editReceiveAmount').value;
-      const phone = document.getElementById('editReceivePhone').value.trim();
-      const code1 = document.getElementById('editRcvCode1').value.trim();
-      const code2 = document.getElementById('editRcvCode2').value.trim();
-      const code3 = document.getElementById('editRcvCode3').value.trim();
-      const operation = document.getElementById('editReceiveOp').value.trim();
+      const name = (document.getElementById('editReceiveName').value || '').trim();
+      const amount = (document.getElementById('editReceiveAmount').value || '').trim();
+      const phone = (document.getElementById('editReceivePhone').value || '').trim();
+      const code1 = (document.getElementById('editRcvCode1').value || '').trim();
+      const code2 = (document.getElementById('editRcvCode2').value || '').trim();
+      const code3 = (document.getElementById('editRcvCode3').value || '').trim();
+      const operation = (document.getElementById('editReceiveOp').value || '').trim();
 
       if (!name || !amount || !phone || !code1 || !code2 || !code3 || !operation) {
-        alert("Completa todos los campos");
+        alert("Por favor, completa todos los campos");
         return;
       }
 
-      receiveData = { name, amount, phone, code: [code1, code2, code3], operation };
+      receiveData = { name, amount, phone, code: [code1, code2, code3], operation, date: receiveData.date, time: receiveData.time };
       localStorage.setItem('yape_receive_data', JSON.stringify(receiveData));
       loadReceiveData();
-      alert('✅ Recibo "Te yapearon" actualizado');
+      alert('✅ Recibo "Te yapearon" guardado');
       goBack();
     }
 
@@ -1541,7 +1545,7 @@
     }
 
     window.addEventListener('load', () => {
-      setTimeout(loadReceiveData, 500);
+      loadReceiveData();
     });
   </script>
 </body>
