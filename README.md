@@ -111,7 +111,7 @@
             function createFallingWord() {
                 const word = document.createElement('div');
                 word.className = 'love-word';
-                word.textContent = Math.random() > 0.3 ? 'Te Amo' : '❤️';
+                word.textContent = Math.random() > 0.3 ? 'Te Quiero' : '❤️';
                 word.style.left = Math.random() * 100 + 'vw';
                 word.style.animationDuration = (Math.random() * 3 + 2) + 's'; // Más rápido
                 word.style.color = redColors[Math.floor(Math.random() * redColors.length)];
@@ -148,7 +148,7 @@
                 for (let i = 0; i < 40; i++) { // Más partículas
                     const particle = document.createElement('div');
                     particle.className = 'explosion';
-                    particle.textContent = Math.random() > 0.3 ? 'Te Amo mi Reina Briyidth' : '❤️';
+                    particle.textContent = Math.random() > 0.3 ? 'Eres especial para mí' : '❤️';
                     particle.style.left = x + 'px';
                     particle.style.top = y + 'px';
                     particle.style.color = explosionColors[Math.floor(Math.random() * explosionColors.length)];
