@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>Yape</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css " rel="stylesheet">
   <style>
     /* ===== VARIABLES GLOBALES ===== */
     :root {
@@ -75,13 +75,11 @@
 
     /* ===== OCULTAR HEADER Y MENÚ EN RECIBO ===== */
     #confirmContainer .top-bar,
-    #confirmContainer .menu-toggle,
-    #receiptReceived .top-bar,
-    #receiptReceived .menu-toggle {
+    #confirmContainer .menu-toggle {
       display: none !important;
     }
 
-    /* ===== MENÚ HAMBURGUESA → CAMBIADO A UN SOLO 👤 ===== */
+    /* ===== MENÚ HAMBURGUESA ===== */
     .menu-toggle {
       position: absolute;
       top: 20px;
@@ -90,10 +88,6 @@
       color: white;
       cursor: pointer;
       z-index: 100;
-    }
-
-    .menu-toggle i {
-      font-size: 1.5em;
     }
 
     .menu-overlay {
@@ -755,122 +749,15 @@
       font-size: 0.85em;
       margin-top: 20px;
     }
-
-    /* ===== NUEVO: PANTALLA PARA "TE YAPEARON" (formulario) ===== */
-    .receive-screen {
-      background: var(--white);
-      border-radius: 20px;
-      margin: 20px 20px 15px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-      display: none;
-    }
-
-    .receive-input {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 1em;
-      margin: 10px 0;
-    }
-
-    .receive-amount {
-      font-size: 2.5em;
-      font-weight: bold;
-      margin: 15px 0;
-      text-align: center;
-    }
-
-    .receive-buttons {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    /* ===== RECIBO: TE YAPEARON ===== */
-    #receiptReceived {
-      display: none;
-      margin: 20px 20px 15px;
-      position: relative;
-    }
-
-    .receipt-screen {
-      background: var(--white);
-      border-radius: 20px;
-      padding: 16px;
-      box-shadow: var(--shadow);
-      font-family: 'Segoe UI', sans-serif;
-      margin-top: 60px;
-    }
-
-    .receipt-title {
-      font-size: 1.3em;
-      color: var(--yape-purple);
-      font-weight: bold;
-      margin: 0;
-    }
-
-    .receipt-amount {
-      font-size: 2.8em;
-      font-weight: bold;
-      margin: 10px 0;
-      text-align: center;
-      color: var(--text);
-    }
-
-    .receipt-name {
-      font-size: 1.2em;
-      font-weight: bold;
-      margin: 10px 0;
-      text-align: center;
-      color: var(--text);
-    }
-
-    .receipt-date {
-      font-size: 0.9em;
-      color: var(--text-secondary);
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .receipt-details {
-      margin-top: 20px;
-      font-size: 0.95em;
-      color: var(--text-secondary);
-      text-align: left;
-    }
-
-    /* ===== DATOS DE TRANSACCIÓN (solo título, sin datos) ===== */
-    .transaction-data {
-      margin: 20px 0;
-      padding: 15px;
-      background: #f9f9f9;
-      border-radius: 12px;
-      border: 1px solid #e0e0e0;
-      text-align: center;
-    }
-
-    .transaction-data h4 {
-      font-size: 1em;
-      color: var(--yape-purple);
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    .transaction-data p {
-      color: var(--text-secondary);
-      font-size: 0.9em;
-    }
   </style>
 </head>
 <body>
 
   <div class="container">
 
-    <!-- ✅ MENÚ: UN SOLO 👤 EN EL HEADER -->
+    <!-- Menú hamburguesa -->
     <div class="menu-toggle" onclick="toggleMenu()">
-      <i class="fas fa-user"></i>
+      <i class="fas fa-bars"></i>
     </div>
 
     <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
@@ -946,20 +833,12 @@
         </div>
       </div>
 
+      <!-- NUEVO: Información de la app -->
       <div class="menu-item" onclick="showScreen('infoScreen')">
         <i class="fas fa-info-circle"></i>
         <div>
           <div class="label">Información de la app</div>
           <div class="desc">Detalles del desarrollo</div>
-        </div>
-      </div>
-
-      <!-- ✅ NUEVO: "Te yapearon" en el menú -->
-      <div class="menu-item" onclick="showReceiveForm()">
-        <i class="fas fa-arrow-down"></i>
-        <div>
-          <div class="label">Te yapearon</div>
-          <div class="desc">Simular recibo</div>
         </div>
       </div>
 
@@ -985,8 +864,9 @@
       </div>
     </div>
 
-    <!-- Header: SOLO UN 👤 en el header, no dos -->
+    <!-- Header -->
     <div class="top-bar">
+      <i class="fas fa-user"></i>
       <h1 id="greeting">Hola, AnthZz</h1>
       <span class="status">Gratis</span>
       <div class="icons">
@@ -997,74 +877,96 @@
 
     <!-- Pantalla: Inicio -->
     <div id="home" class="screen active">
-      <!-- (Todo tu contenido original se mantiene intacto) -->
       <div class="services-grid">
+        <!-- Recargar celular -->
         <div class="service-item" onclick="startScan()">
           <div class="service-icon">
             <img src=" https://i.postimg.cc/9FzMzGFm/Screenshot-20250823-104637.jpg " alt="Recargar celular">
           </div>
           <div>Recargar celular</div>
         </div>
+
+        <!-- Yapear servicios -->
         <div class="service-item" onclick="alert('Yapear servicios')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/QCvrFK0C/Screenshot-20250823-104730.jpg " alt="Yapear servicios">
           </div>
           <div>Yapear servicios</div>
         </div>
+
+        <!-- Promos -->
         <div class="service-item" onclick="alert('Promos')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/DwrKzZsf/Screenshot-20250823-104820.jpg " alt="Promos">
           </div>
           <div>Promos</div>
         </div>
+
+        <!-- Aprobar compras -->
         <div class="service-item" onclick="alert('Aprobar compras')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/Y9y5PmcR/Screenshot-20250823-104906.jpg " alt="Aprobar compras">
           </div>
           <div>Aprobar compras</div>
         </div>
+
+        <!-- Créditos -->
         <div class="service-item" onclick="alert('Créditos')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/xTHdK9Hh/Screenshot-20250823-104933.jpg " alt="Créditos">
           </div>
           <div>Créditos</div>
         </div>
+
+        <!-- Tienda -->
         <div class="service-item" onclick="alert('Tienda')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/pT42FSdP/Screenshot-20250823-105003.jpg " alt="Tienda">
           </div>
           <div>Tienda</div>
         </div>
+
+        <!-- Dólares -->
         <div class="service-item" onclick="alert('Dólares')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/jjB9QYy3/Screenshot-20250823-105020.jpg " alt="Dólares">
           </div>
           <div>Dólares</div>
         </div>
+
+        <!-- Remesas -->
         <div class="service-item" onclick="alert('Remesas')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/wvJrw4Vq/Screenshot-20250823-105050.jpg " alt="Remesas">
           </div>
           <div>Remesas</div>
         </div>
+
+        <!-- SOAT -->
         <div class="service-item" onclick="alert('SOAT')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/RZFbkZRb/Screenshot-20250823-105128.jpg " alt="SOAT">
           </div>
           <div>SOAT</div>
         </div>
+
+        <!-- Viajar en bus -->
         <div class="service-item" onclick="alert('Viajar en bus')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/63sj4LND/Screenshot-20250823-105147.jpg " alt="Viajar en bus">
           </div>
           <div>Viajar en bus</div>
         </div>
+
+        <!-- Biométrica -->
         <div class="service-item" onclick="alert('Biométrica')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/qq41jJqw/Screenshot-20250823-105211.jpg " alt="Biométrica">
           </div>
           <div>Biométrica</div>
         </div>
+
+        <!-- Ver todo -->
         <div class="service-item" onclick="alert('Ver todo')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/RVPgLzB1/Screenshot-20250823-105316.jpg " alt="Ver todo">
@@ -1073,6 +975,7 @@
         </div>
       </div>
 
+      <!-- Imagen 1: arriba del saldo -->
       <div class="promo-banner-top">
         <img src="https://i.postimg.cc/85Mf0TWF/1755961504718.jpg " alt="Promoción">
       </div>
@@ -1084,13 +987,18 @@
         </div>
       </div>
 
+      <!-- Movimientos: Mostrar lista -->
       <div class="movements-toggle" onclick="showScreen('movementsList')">
         <span>Mostrar movimientos</span>
         <i class="fas fa-chevron-down"></i>
       </div>
 
-      <div id="movementsList" class="screen movements-list" style="display:none;"></div>
+      <!-- Lista de movimientos -->
+      <div id="movementsList" class="screen movements-list" style="display:none;">
+        <!-- Se llena con JavaScript -->
+      </div>
 
+      <!-- Botones en fila horizontal -->
       <div class="buttons-row">
         <button class="big-button" onclick="startScan()">
           <i class="fas fa-qrcode"></i>
@@ -1118,21 +1026,27 @@
       </div>
     </div>
 
-    <!-- ✅ RECIBO: ¡Yapeaste! con "DATOS DE TRANSACCIÓN" (solo título) -->
+    <!-- Contenido: Recibo + Anuncio -->
     <div id="confirmContainer" class="screen confirm-container">
+      <!-- ✅ X (cerrar) - más arriba, en la esquina superior derecha de la pantalla -->
       <div class="global-close" onclick="goBack()">
         <i class="fas fa-times"></i>
       </div>
+
+      <!-- Recibo de pago -->
       <div class="confirm-screen">
+        <!-- ✅ Botón de compartir DENTRO del recibo -->
         <button class="share-inside" onclick="alert('Compartir recibo')">
           <i class="fas fa-share-alt"></i>
         </button>
+
         <div class="confirm-title">¡Yapeaste!</div>
         <div class="confirm-amount">S/ <span id="confirmAmount">1</span></div>
         <div class="confirm-name"><span id="confirmName">AnthZz Berrocal</span></div>
         <div class="confirm-date">
           <i class="fas fa-calendar"></i> <span id="confirmDate">22 ago. 2025</span> | <i class="fas fa-clock"></i> <span id="confirmTime">10:35 p.m.</span>
         </div>
+
         <div class="security-code">
           <span>CÓDIGO DE SEGURIDAD</span>
           <i class="fas fa-info-circle"></i>
@@ -1142,11 +1056,7 @@
             <div class="digit" id="code3">4</div>
           </div>
         </div>
-        <!-- ✅ Solo el título -->
-        <div class="transaction-data">
-          <h4>DATOS DE TRANSACCIÓN</h4>
-          <p></p>
-        </div>
+
         <div class="confirm-details">
           <div class="detail-row">
             <span>Nro. de celular</span>
@@ -1162,64 +1072,14 @@
           </div>
         </div>
       </div>
+
+      <!-- Imagen 2: anuncio del iPhone -->
       <div class="promo-banner-bottom">
         <img src="https://i.postimg.cc/FRNhhv8k/1755961471955.jpg " alt="iPhone 16e">
       </div>
     </div>
 
-    <!-- ✅ NUEVO: FORMULARIO PARA "TE YAPEARON" -->
-    <div id="receiveForm" class="screen receive-screen">
-      <div class="send-title">¿Quién te yapeó?</div>
-      <input type="tel" id="receivePhone" placeholder="987 654 321" class="receive-input">
-      <div class="send-title">Nombre del remitente</div>
-      <input type="text" id="receiveName" placeholder="Carlos Pérez" value="Carlos Pérez" class="receive-input">
-      <div class="send-title">¿Cuánto recibiste?</div>
-      <div class="receive-amount">S/ <span id="receiveAmount">0.00</span></div>
-      <input type="number" id="amountInputReceive" placeholder="0.00" class="receive-input" oninput="updateReceiveAmount(this.value)">
-      <div class="receive-buttons">
-        <button class="send-btn cancel" onclick="goBack()">Cancelar</button>
-        <button class="send-btn send" onclick="confirmReceive()">Aceptar</button>
-      </div>
-    </div>
-
-    <!-- ✅ RECIBO: ¡Te yapearon! -->
-    <div id="receiptReceived" class="screen confirm-container">
-      <div class="global-close" onclick="goBack()">
-        <i class="fas fa-times"></i>
-      </div>
-      <div class="receipt-screen">
-        <button class="share-inside" onclick="alert('Compartir recibo')">
-          <i class="fas fa-share-alt"></i>
-        </button>
-        <div class="receipt-title">¡Te yapearon!</div>
-        <div class="receipt-amount">S/ <span id="receiptAmount">100.00</span></div>
-        <div class="receipt-name"><span id="receiptName">Carlos Pérez</span></div>
-        <div class="receipt-date">
-          <i class="fas fa-calendar"></i> <span id="receiptDate">22 ago. 2025</span> | <i class="fas fa-clock"></i> <span id="receiptTime">10:35 p.m.</span>
-        </div>
-        <!-- ✅ Solo el título -->
-        <div class="transaction-data">
-          <h4>DATOS DE TRANSACCIÓN</h4>
-          <p></p>
-        </div>
-        <div class="receipt-details">
-          <div class="detail-row">
-            <span>Nro. de celular</span>
-            <span id="receiptPhone">*** *** 777</span>
-          </div>
-          <div class="detail-row">
-            <span>Origen</span>
-            <span>Yape</span>
-          </div>
-          <div class="detail-row">
-            <span>Nro. de operación</span>
-            <span id="receiptOp">98765432</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Resto de pantallas (intactas) -->
+    <!-- Pantalla: Perfil -->
     <div id="profile" class="screen" style="display:none; padding:20px;">
       <h2 style="color:var(--yape-purple); margin:20px 0;">Editar Perfil</h2>
       <img src="https://ui-avatars.com/api/?name=AnthZz+Berrocal&background=7b1fa2&color=fff" alt="Foto" class="profile-pic" id="profilePic" onclick="changePhoto()" style="width:80px; height:80px; border-radius:50%; margin:20px auto; display:block; border:3px solid var(--yape-purple);">
@@ -1243,6 +1103,7 @@
       <button class="big-button secondary" style="margin-top:10px;" onclick="goBack()">← Volver</button>
     </div>
 
+    <!-- Pantalla: Editar Saldo -->
     <div id="editBalance" class="screen" style="display:none; padding:20px;">
       <h2 style="color:var(--yape-purple); margin:20px 0;">Editar Saldo</h2>
       <div style="margin:15px 0;">
@@ -1253,6 +1114,7 @@
       <button class="big-button secondary" style="margin-top:10px;" onclick="goBack()">← Volver</button>
     </div>
 
+    <!-- Pantalla: Información de la app -->
     <div id="infoScreen" class="info-screen">
       <h2>Yape Fake v2.5</h2>
       <p>Desarrollado por</p>
@@ -1263,12 +1125,13 @@
         <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png " alt="GitHub">
         Ver más en GitHub
       </a>
-      <p class="footer-text">Somos legión no olvides,Esperamos</p>
+      <p class="footer-text">Somos legión no olvides,Esperanos</p>
       <button class="big-button secondary" style="margin-top:20px; width:100%;" onclick="goBack()">
         <i class="fas fa-arrow-left"></i> Volver
       </button>
     </div>
 
+    <!-- Escaneo QR -->
     <div id="scanScreen" class="scan-screen">
       <div class="scan-overlay"></div>
       <div class="scan-frame">
@@ -1279,8 +1142,10 @@
       </div>
     </div>
 
+    <!-- Chispas -->
     <div class="sparkles" id="sparkles"></div>
 
+    <!-- Footer -->
     <div class="footer">
       <strong>by AnthZz Berrocal _BerMat_Mods</strong>
     </div>
@@ -1288,7 +1153,6 @@
   </div>
 
   <script>
-    // (Tu script original + nuevas funciones)
     let balance = 27.00;
     let balanceVisible = false;
     let userName = "AnthZz";
@@ -1300,6 +1164,7 @@
       photo: "https://ui-avatars.com/api/?name=AnthZz+Berrocal&background=7b1fa2&color=fff"
     };
 
+    // Historial de movimientos
     let movements = JSON.parse(localStorage.getItem('yape_movements')) || [];
 
     function toggleMenu() {
@@ -1390,55 +1255,9 @@
       document.getElementById('confirmPhone').textContent = `*** *** ${phone.slice(-3)}`;
       document.getElementById('confirmOp').textContent = Math.floor(Math.random() * 90000000 + 10000000);
       showSparkles();
+
+      // Registrar movimiento completo
       addMovement(name, phone, amount);
-    }
-
-    // ✅ NUEVAS FUNCIONES: "Te yapearon"
-    function showReceiveForm() {
-      document.getElementById('receivePhone').value = '';
-      document.getElementById('receiveName').value = 'Carlos Pérez';
-      document.getElementById('amountInputReceive').value = '';
-      document.getElementById('receiveAmount').textContent = '0.00';
-      showScreen('receiveForm');
-    }
-
-    function updateReceiveAmount(value) {
-      document.getElementById('receiveAmount').textContent = value || '0.00';
-    }
-
-    function confirmReceive() {
-      const phone = document.getElementById('receivePhone').value;
-      const name = document.getElementById('receiveName').value;
-      const amount = document.getElementById('receiveAmount').textContent;
-      if (!phone || phone.length < 9) {
-        alert("Número inválido");
-        return;
-      }
-      if (!amount || amount === '0.00') {
-        alert("Ingresa un monto válido");
-        return;
-      }
-      showReceiptReceived(phone, name, amount);
-    }
-
-    function showReceiptReceived(phone, name, amount) {
-      showScreen('receiptReceived');
-      document.getElementById('receiptAmount').textContent = amount;
-      document.getElementById('receiptName').textContent = name;
-      const now = new Date();
-      const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-      const month = months[now.getMonth()];
-      const day = now.getDate();
-      const year = now.getFullYear();
-      const hour = now.getHours();
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      const ampm = hour >= 12 ? 'p.m.' : 'a.m.';
-      const hour12 = hour % 12 || 12;
-      document.getElementById('receiptDate').textContent = `${day} ${month}. ${year}`;
-      document.getElementById('receiptTime').textContent = `${hour12}:${minutes} ${ampm}`;
-      document.getElementById('receiptPhone').textContent = `*** *** ${phone.slice(-3)}`;
-      document.getElementById('receiptOp').textContent = Math.floor(Math.random() * 90000000 + 10000000);
-      showSparkles();
     }
 
     function addMovement(name, phone, amount) {
@@ -1504,7 +1323,7 @@
         userProfile.photo = url.trim();
       } else {
         const name = document.getElementById('editName').value || 'AnthZz Berrocal';
-        userProfile.photo = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=7b1fa2&color=fff`;
+        userProfile.photo = ` https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=7b1fa2&color=fff`;
       }
       document.getElementById('profilePic').src = userProfile.photo;
       document.getElementById('menuProfilePic').src = userProfile.photo;
@@ -1564,6 +1383,165 @@
     window.addEventListener('load', () => {
       showScreen('home');
       renderMovements();
+    });
+  </script>
+
+  <!-- ===== AÑADIDO: RECIBO "TE YAPEARON" EDITABLE DESDE EL MENÚ ===== -->
+  <script>
+    // Añadir opción "Editar Te yapearon" al menú sin tocar HTML original
+    const menuItems = document.querySelector('.menu-sidebar');
+    const newItem = document.createElement('div');
+    newItem.className = 'menu-item';
+    newItem.onclick = () => showScreen('editReceive');
+    newItem.innerHTML = `
+      <i class="fas fa-exchange-alt"></i>
+      <div>
+        <div class="label">Editar "Te yapearon"</div>
+        <div class="desc">Personaliza el recibo</div>
+      </div>
+    `;
+    menuItems.appendChild(newItem);
+  </script>
+
+  <!-- RECIBO: Te yapearon -->
+  <div id="receiveContainer" class="screen" style="display:none; position:relative;">
+    <div class="global-close" onclick="goBack()">
+      <i class="fas fa-times"></i>
+    </div>
+    <div class="confirm-screen">
+      <button class="share-inside" onclick="alert('Compartir recibo')">
+        <i class="fas fa-share-alt"></i>
+      </button>
+      <div class="confirm-title">¡Te yapearon!</div>
+      <div class="confirm-amount">S/ <span id="receiveAmount">100.00</span></div>
+      <div class="confirm-name"><span id="receiveName">Luis Gómez</span></div>
+      <div class="confirm-date">
+        <i class="fas fa-calendar"></i> <span id="receiveDate">23 ago. 2025</span> | 
+        <i class="fas fa-clock"></i> <span id="receiveTime">09:15 a.m.</span>
+      </div>
+      <div class="security-code">
+        <span>CÓDIGO DE SEGURIDAD</span>
+        <i class="fas fa-info-circle"></i>
+        <div class="security-digits">
+          <div class="digit" id="rcvCode1">3</div>
+          <div class="digit" id="rcvCode2">7</div>
+          <div class="digit" id="rcvCode3">1</div>
+        </div>
+      </div>
+      <div class="confirm-details">
+        <div class="detail-row">
+          <span>Nro. de celular</span>
+          <span id="receivePhone">*** *** 456</span>
+        </div>
+        <div class="detail-row">
+          <span>Origen</span>
+          <span>Yape</span>
+        </div>
+        <div class="detail-row">
+          <span>Nro. de operación</span>
+          <span id="receiveOp">87654321</span>
+        </div>
+      </div>
+    </div>
+    <div class="promo-banner-bottom">
+      <img src="https://i.postimg.cc/FRNhhv8k/1755961471955.jpg" alt="iPhone 16e">
+    </div>
+  </div>
+
+  <!-- PANTALLA: Editar "Te yapearon" -->
+  <div id="editReceive" class="screen" style="display:none; padding:20px; background:white; border-radius:20px; margin:20px;">
+    <h2 style="color:var(--yape-purple); margin:20px 0;">Editar "Te yapearon"</h2>
+    <div style="margin:15px 0;">
+      <label style="display:block; margin-bottom:8px; color:#333;">Nombre del que te yapeó</label>
+      <input type="text" id="editReceiveName" value="Luis Gómez" style="width:100%; padding:12px; border-radius:8px; border:1px solid #e0e0e0; font-size:1em;">
+    </div>
+    <div style="margin:15px 0;">
+      <label style="display:block; margin-bottom:8px; color:#333;">Monto (S/)</label>
+      <input type="number" step="0.01" id="editReceiveAmount" value="100.00" style="width:100%; padding:12px; border-radius:8px; border:1px solid #e0e0e0; font-size:1em;">
+    </div>
+    <div style="margin:15px 0;">
+      <label style="display:block; margin-bottom:8px; color:#333;">Últimos 3 dígitos del número</label>
+      <input type="text" id="editReceivePhone" value="456" maxlength="3" style="width:100%; padding:12px; border-radius:8px; border:1px solid #e0e0e0; font-size:1em;">
+    </div>
+    <div style="margin:15px 0;">
+      <label style="display:block; margin-bottom:8px; color:#333;">Código de seguridad</label>
+      <div style="display:flex; gap:10px;">
+        <input type="text" id="editRcvCode1" value="3" maxlength="1" style="width:50px; text-align:center; font-size:1.2em; font-weight:bold;">
+        <input type="text" id="editRcvCode2" value="7" maxlength="1" style="width:50px; text-align:center; font-size:1.2em; font-weight:bold;">
+        <input type="text" id="editRcvCode3" value="1" maxlength="1" style="width:50px; text-align:center; font-size:1.2em; font-weight:bold;">
+      </div>
+    </div>
+    <div style="margin:15px 0;">
+      <label style="display:block; margin-bottom:8px; color:#333;">Número de operación</label>
+      <input type="text" id="editReceiveOp" value="87654321" style="width:100%; padding:12px; border-radius:8px; border:1px solid #e0e0e0; font-size:1em;">
+    </div>
+    <button class="big-button" onclick="saveReceiveData()">Guardar Cambios</button>
+    <button class="big-button secondary" style="margin-top:10px;" onclick="goBack()">← Volver</button>
+  </div>
+
+  <!-- SCRIPT: Funcionalidad "Te yapearon" -->
+  <script>
+    let receiveData = JSON.parse(localStorage.getItem('yape_receive_data')) || {
+      name: 'Luis Gómez',
+      amount: '100.00',
+      phone: '456',
+      code: ['3','7','1'],
+      operation: '87654321',
+      date: '23 ago. 2025',
+      time: '09:15 a.m.'
+    };
+
+    function loadReceiveData() {
+      document.getElementById('receiveAmount').textContent = receiveData.amount;
+      document.getElementById('receiveName').textContent = receiveData.name;
+      document.getElementById('receivePhone').textContent = `*** *** ${receiveData.phone}`;
+      document.getElementById('rcvCode1').textContent = receiveData.code[0];
+      document.getElementById('rcvCode2').textContent = receiveData.code[1];
+      document.getElementById('rcvCode3').textContent = receiveData.code[2];
+      document.getElementById('receiveOp').textContent = receiveData.operation;
+      document.getElementById('receiveDate').textContent = receiveData.date;
+      document.getElementById('receiveTime').textContent = receiveData.time;
+
+      if (document.getElementById('editReceiveName')) {
+        document.getElementById('editReceiveName').value = receiveData.name;
+        document.getElementById('editReceiveAmount').value = receiveData.amount;
+        document.getElementById('editReceivePhone').value = receiveData.phone;
+        document.getElementById('editRcvCode1').value = receiveData.code[0];
+        document.getElementById('editRcvCode2').value = receiveData.code[1];
+        document.getElementById('editRcvCode3').value = receiveData.code[2];
+        document.getElementById('editReceiveOp').value = receiveData.operation;
+      }
+    }
+
+    function saveReceiveData() {
+      const name = document.getElementById('editReceiveName').value.trim();
+      const amount = document.getElementById('editReceiveAmount').value;
+      const phone = document.getElementById('editReceivePhone').value.trim();
+      const code1 = document.getElementById('editRcvCode1').value.trim();
+      const code2 = document.getElementById('editRcvCode2').value.trim();
+      const code3 = document.getElementById('editRcvCode3').value.trim();
+      const operation = document.getElementById('editReceiveOp').value.trim();
+
+      if (!name || !amount || !phone || !code1 || !code2 || !code3 || !operation) {
+        alert("Completa todos los campos");
+        return;
+      }
+
+      receiveData = { name, amount, phone, code: [code1, code2, code3], operation };
+      localStorage.setItem('yape_receive_data', JSON.stringify(receiveData));
+      loadReceiveData();
+      alert('✅ Recibo "Te yapearon" actualizado');
+      goBack();
+    }
+
+    function showReceive() {
+      loadReceiveData();
+      showScreen('receiveContainer');
+      showSparkles();
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(loadReceiveData, 500);
     });
   </script>
 </body>
