@@ -452,7 +452,32 @@
       color: white;
     }
 
-    /* ===== PANTALLA DE CONFIRMACIÓN (¡Yapeaste!) ===== */
+    /* ===== PANTALLA: EDITAR "TE YAPEARON" ===== */
+    .edit-te-yapearon {
+      display: none;
+      background: var(--white);
+      border-radius: 20px;
+      margin: 20px 20px 15px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .edit-title {
+      font-size: 1.4em;
+      color: var(--yape-purple);
+      margin-bottom: 16px;
+    }
+
+    .edit-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1em;
+      margin: 10px 0;
+    }
+
+    /* ===== PANTALLA DE CONFIRMACIÓN (¡Te yapearon!) ===== */
     .confirm-container {
       display: none;
       margin: 20px 20px 15px;
@@ -500,15 +525,6 @@
       color: var(--text);
     }
 
-    .confirm-amount-words {
-      font-size: 0.95em;
-      color: var(--text-secondary);
-      text-align: center;
-      margin: 5px 0 15px;
-      font-style: italic;
-      letter-spacing: 0.3px;
-    }
-
     .confirm-name {
       font-size: 1.2em;
       font-weight: bold;
@@ -524,54 +540,19 @@
       text-align: center;
     }
 
-    .security-code {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 15px 0;
-      padding-bottom: 15px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .security-code span {
-      font-size: 0.9em;
-      color: var(--text-secondary);
-      font-weight: bold;
-    }
-
-    .security-code i {
-      color: var(--yape-green);
-      font-size: 1.2em;
-    }
-
-    .security-digits {
-      display: flex;
-      gap: 10px;
-    }
-
-    .digit {
-      width: 40px;
-      height: 40px;
-      background: #f0f0f0;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      color: var(--text);
-    }
-
     /* ===== DATOS DE TRANSACCIÓN (como en app real) ===== */
     .transaction-details {
-      margin-top: 15px;
+      margin-top: 20px;
       font-size: 0.95em;
       color: var(--text);
+      border-top: 1px solid var(--border);
+      padding-top: 15px;
     }
 
     .detail-row {
       display: flex;
       justify-content: space-between;
-      margin: 8px 0;
+      margin: 10px 0;
       font-weight: 500;
     }
 
@@ -780,11 +761,12 @@
         <p>_BerMat_Mods</p>
       </div>
 
-      <div class="menu-item" onclick="showScreen('profile')">
-        <i class="fas fa-user"></i>
+      <!-- ✅ NUEVO: Opción "Te yapearon" -->
+      <div class="menu-item" onclick="showScreen('editTeYapearon')">
+        <i class="fas fa-arrow-down"></i>
         <div>
-          <div class="label">Perfil</div>
-          <div class="desc">Editar información</div>
+          <div class="label">Te yapearon</div>
+          <div class="desc">Simular recibo de entrada</div>
         </div>
       </div>
 
@@ -796,20 +778,12 @@
         </div>
       </div>
 
-      <!-- ✅ NUEVO: Opción "Te yapearon" -->
-      <div class="menu-item" onclick="simulateIncomingTransfer()">
-        <i class="fas fa-arrow-down"></i>
-        <div>
-          <div class="label">Te yapearon</div>
-          <div class="desc">Simular recibo de entrada</div>
-        </div>
-      </div>
-
+      <!-- ✅ Crédito actualizado a 20,000 -->
       <div class="menu-item" onclick="alert('Créditos')">
         <i class="fas fa-hand-holding-usd"></i>
         <div>
           <div class="label">Créditos</div>
-          <div class="desc">S/ 8000 disponibles</div>
+          <div class="desc">S/ 20,000 disponibles</div>
         </div>
       </div>
 
@@ -897,72 +871,95 @@
     <!-- Pantalla: Inicio -->
     <div id="home" class="screen active">
       <div class="services-grid">
+        <!-- Recargar celular -->
         <div class="service-item" onclick="startScan()">
           <div class="service-icon">
             <img src=" https://i.postimg.cc/9FzMzGFm/Screenshot-20250823-104637.jpg " alt="Recargar celular">
           </div>
           <div>Recargar celular</div>
         </div>
+
+        <!-- Yapear servicios -->
         <div class="service-item" onclick="alert('Yapear servicios')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/QCvrFK0C/Screenshot-20250823-104730.jpg " alt="Yapear servicios">
           </div>
           <div>Yapear servicios</div>
         </div>
+
+        <!-- Promos -->
         <div class="service-item" onclick="alert('Promos')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/DwrKzZsf/Screenshot-20250823-104820.jpg " alt="Promos">
           </div>
           <div>Promos</div>
         </div>
+
+        <!-- Aprobar compras -->
         <div class="service-item" onclick="alert('Aprobar compras')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/Y9y5PmcR/Screenshot-20250823-104906.jpg " alt="Aprobar compras">
           </div>
           <div>Aprobar compras</div>
         </div>
+
+        <!-- Créditos -->
         <div class="service-item" onclick="alert('Créditos')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/xTHdK9Hh/Screenshot-20250823-104933.jpg " alt="Créditos">
           </div>
           <div>Créditos</div>
         </div>
+
+        <!-- Tienda -->
         <div class="service-item" onclick="alert('Tienda')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/pT42FSdP/Screenshot-20250823-105003.jpg " alt="Tienda">
           </div>
           <div>Tienda</div>
         </div>
+
+        <!-- Dólares -->
         <div class="service-item" onclick="alert('Dólares')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/jjB9QYy3/Screenshot-20250823-105020.jpg " alt="Dólares">
           </div>
           <div>Dólares</div>
         </div>
+
+        <!-- Remesas -->
         <div class="service-item" onclick="alert('Remesas')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/wvJrw4Vq/Screenshot-20250823-105050.jpg " alt="Remesas">
           </div>
           <div>Remesas</div>
         </div>
+
+        <!-- SOAT -->
         <div class="service-item" onclick="alert('SOAT')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/RZFbkZRb/Screenshot-20250823-105128.jpg " alt="SOAT">
           </div>
           <div>SOAT</div>
         </div>
+
+        <!-- Viajar en bus -->
         <div class="service-item" onclick="alert('Viajar en bus')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/63sj4LND/Screenshot-20250823-105147.jpg " alt="Viajar en bus">
           </div>
           <div>Viajar en bus</div>
         </div>
+
+        <!-- Biométrica -->
         <div class="service-item" onclick="alert('Biométrica')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/qq41jJqw/Screenshot-20250823-105211.jpg " alt="Biométrica">
           </div>
           <div>Biométrica</div>
         </div>
+
+        <!-- Ver todo -->
         <div class="service-item" onclick="alert('Ver todo')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/RVPgLzB1/Screenshot-20250823-105316.jpg " alt="Ver todo">
@@ -971,8 +968,9 @@
         </div>
       </div>
 
+      <!-- Imagen 1: arriba del saldo -->
       <div class="promo-banner-top">
-        <img src="https://i.postimg.cc/85Mf0TWF/1755961504718.jpg" alt="Promoción">
+        <img src="https://i.postimg.cc/85Mf0TWF/1755961504718.jpg " alt="Promoción">
       </div>
 
       <div class="balance-card">
@@ -982,13 +980,18 @@
         </div>
       </div>
 
+      <!-- Movimientos: Mostrar lista -->
       <div class="movements-toggle" onclick="showScreen('movementsList')">
         <span>Mostrar movimientos</span>
         <i class="fas fa-chevron-down"></i>
       </div>
 
-      <div id="movementsList" class="screen movements-list" style="display:none;"></div>
+      <!-- Lista de movimientos -->
+      <div id="movementsList" class="screen movements-list" style="display:none;">
+        <!-- Se llena con JavaScript -->
+      </div>
 
+      <!-- Botones en fila horizontal -->
       <div class="buttons-row">
         <button class="big-button" onclick="startScan()">
           <i class="fas fa-qrcode"></i>
@@ -1016,62 +1019,74 @@
       </div>
     </div>
 
-    <!-- Recibo de confirmación -->
+    <!-- ✅ NUEVO: Pantalla para editar "Te yapearon" -->
+    <div id="editTeYapearon" class="screen edit-te-yapearon">
+      <h2 class="edit-title">Editar recibo de entrada</h2>
+
+      <label>Monto (S/)</label>
+      <input type="number" id="editAmount" value="50.00" class="edit-input" step="0.01">
+
+      <label>Nombre del remitente</label>
+      <input type="text" id="editName" value="Juan Pérez" class="edit-input">
+
+      <label>Número de celular</label>
+      <input type="text" id="editPhone" value="987654321" class="edit-input">
+
+      <button class="big-button" style="margin-top:20px;" onclick="simulateTeYapearon()">
+        <i class="fas fa-arrow-down"></i> Simular "Te yapearon"
+      </button>
+      <button class="big-button secondary" style="margin-top:10px;" onclick="goBack()">← Volver</button>
+    </div>
+
+    <!-- Recibo de "Te yapearon" -->
     <div id="confirmContainer" class="screen confirm-container">
+      <!-- X para cerrar -->
       <div class="global-close" onclick="goBack()">
         <i class="fas fa-times"></i>
       </div>
 
+      <!-- Recibo -->
       <div class="confirm-screen">
+        <!-- Botón compartir -->
         <button class="share-inside" onclick="alert('Compartir recibo')">
           <i class="fas fa-share-alt"></i>
         </button>
 
-        <div class="confirm-title">¡Yapeaste!</div>
-        <div class="confirm-amount">S/ <span id="confirmAmount">1</span></div>
-        <div class="confirm-amount-words" id="confirmAmountWords">Un sol con 00/100</div>
-        <div class="confirm-name"><span id="confirmName">AnthZz Berrocal</span></div>
+        <div class="confirm-title">¡Te yapearon!</div>
+        <div class="confirm-amount">S/ <span id="confirmAmount">50.00</span></div>
+        <div class="confirm-name"><span id="confirmName">Juan Pérez</span></div>
         <div class="confirm-date">
           <i class="fas fa-calendar"></i> <span id="confirmDate">22 ago. 2025</span> | <i class="fas fa-clock"></i> <span id="confirmTime">10:35 p.m.</span>
         </div>
 
-        <div class="security-code">
-          <span>CÓDIGO DE SEGURIDAD</span>
-          <i class="fas fa-info-circle"></i>
-          <div class="security-digits">
-            <div class="digit" id="code1">4</div>
-            <div class="digit" id="code2">6</div>
-            <div class="digit" id="code3">4</div>
-          </div>
-        </div>
-
-        <!-- ✅ DATOS DE TRANSACCIÓN (como en app real) -->
+        <!-- ✅ DATOS DE TRANSACCIÓN (como en Yape real) -->
         <div class="transaction-details">
           <div class="detail-row">
-            <span class="detail-label">Concepto</span>
-            <span>Yape</span>
+            <span class="detail-label">Monto</span>
+            <span>S/ <span id="transAmount">50.00</span></span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Fecha y hora</span>
-            <span id="confirmDateTime">22 ago. 2025, 10:35 p.m.</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Nro. de operación</span>
-            <span id="confirmOp">25422464</span>
+            <span class="detail-label">Remitente</span>
+            <span id="transName">Juan Pérez</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Nro. de celular</span>
-            <span id="confirmPhone">*** *** 777</span>
+            <span id="transPhone">*** *** 321</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Destino</span>
-            <span>Yape</span>
+            <span class="detail-label">Fecha y hora</span>
+            <span id="transDateTime">22 ago. 2025, 10:35 p.m.</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Nro. de operación</span>
+            <span id="transOp">25422464</span>
           </div>
         </div>
       </div>
 
+      <!-- Anuncio -->
       <div class="promo-banner-bottom">
-        <img src="https://i.postimg.cc/FRNhhv8k/1755961471955.jpg" alt="iPhone 16e">
+        <img src="https://i.postimg.cc/FRNhhv8k/1755961471955.jpg " alt="iPhone 16e">
       </div>
     </div>
 
@@ -1117,8 +1132,8 @@
       <p class="dev-name">AnthZz Berrocal _BerMat_Mods</p>
       <p>Versión más reciente lanzada por BerMatMods</p>
       <hr style="border:1px solid #e0e0e0; margin:20px 0;">
-      <a href="https://github.com/BerMatMods" target="_blank" class="github-link">
-        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
+      <a href=" https://github.com/BerMatMods " target="_blank" class="github-link">
+        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png " alt="GitHub">
         Ver más en GitHub
       </a>
       <p class="footer-text">Somos legión no olvides,Esperanos</p>
@@ -1162,57 +1177,12 @@
 
     let movements = JSON.parse(localStorage.getItem('yape_movements')) || [];
 
-    // Función para convertir número a letras
-    function numeroALetras(numero) {
-      const unidades = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
-      const decenas = ['', '', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
-      const especiales = ['diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve'];
-      const centenas = ['', 'cien', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
-
-      function convertirGrupo(n) {
-        if (n === 0) return '';
-        if (n === 100) return 'cien';
-        let texto = '';
-
-        if (n >= 100) {
-          texto += centenas[Math.floor(n / 100)];
-          n %= 100;
-          if (n > 0) texto += ' ';
-        }
-
-        if (n >= 20) {
-          texto += decenas[Math.floor(n / 10)];
-          if (n % 10 > 0) texto += ' y ' + unidades[n % 10];
-        } else if (n >= 10) {
-          texto += especiales[n - 10];
-        } else if (n > 0) {
-          texto += unidades[n];
-        }
-
-        return texto;
-      }
-
-      const entero = Math.floor(numero);
-      const decimal = Math.round((numero - entero) * 100);
-
-      if (entero === 0) return `cero soles con ${decimal}/100`;
-
-      let textoEntero = '';
-      if (entero === 1) {
-        textoEntero = 'un sol';
-      } else {
-        if (entero < 1000) {
-          textoEntero = convertirGrupo(entero);
-        } else if (entero < 2000) {
-          textoEntero = 'mil ' + convertirGrupo(entero % 1000);
-        } else {
-          textoEntero = convertirGrupo(Math.floor(entero / 1000)) + ' mil ' + convertirGrupo(entero % 1000);
-        }
-        textoEntero = textoEntero.trim() + ' soles';
-      }
-
-      return `${textoEntero} con ${decimal.toString().padStart(2, '0')}/100`;
-    }
+    // Datos para "Te yapearon"
+    let teYapearonData = {
+      amount: 50.00,
+      name: "Juan Pérez",
+      phone: "987654321"
+    };
 
     function toggleMenu() {
       const sidebar = document.getElementById('menuSidebar');
@@ -1283,12 +1253,8 @@
 
     function showConfirm(phone, name, amount) {
       showScreen('confirmContainer');
-      const amountNum = parseFloat(amount);
-
       document.getElementById('confirmAmount').textContent = amount;
-      document.getElementById('confirmAmountWords').textContent = numeroALetras(amountNum);
       document.getElementById('confirmName').textContent = name;
-
       const now = new Date();
       const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
       const month = months[now.getMonth()];
@@ -1298,25 +1264,29 @@
       const minutes = now.getMinutes().toString().padStart(2, '0');
       const ampm = hour >= 12 ? 'p.m.' : 'a.m.';
       const hour12 = hour % 12 || 12;
-
       document.getElementById('confirmDate').textContent = `${day} ${month}. ${year}`;
       document.getElementById('confirmTime').textContent = `${hour12}:${minutes} ${ampm}`;
-      document.getElementById('confirmDateTime').textContent = `${day} ${month}. ${year}, ${hour12}:${minutes} ${ampm}`;
-
       document.getElementById('code1').textContent = Math.floor(Math.random() * 10);
       document.getElementById('code2').textContent = Math.floor(Math.random() * 10);
       document.getElementById('code3').textContent = Math.floor(Math.random() * 10);
       document.getElementById('confirmPhone').textContent = `*** *** ${phone.slice(-3)}`;
       document.getElementById('confirmOp').textContent = Math.floor(Math.random() * 90000000 + 10000000);
-
       showSparkles();
-      addMovement(name, phone, amountNum);
+      addMovement(name, phone, amount);
     }
 
-    function simulateIncomingTransfer() {
-      const amount = (Math.random() * 100 + 10).toFixed(2);
-      const sender = "Juan Pérez";
-      const phone = "+51 987 654 321";
+    // ✅ Simular "Te yapearon"
+    function simulateTeYapearon() {
+      teYapearonData.amount = parseFloat(document.getElementById('editAmount').value) || 0;
+      teYapearonData.name = document.getElementById('editName').value || "Desconocido";
+      teYapearonData.phone = document.getElementById('editPhone').value || "000000000";
+
+      document.getElementById('confirmAmount').textContent = teYapearonData.amount.toFixed(2);
+      document.getElementById('confirmName').textContent = teYapearonData.name;
+      document.getElementById('transAmount').textContent = teYapearonData.amount.toFixed(2);
+      document.getElementById('transName').textContent = teYapearonData.name;
+      document.getElementById('transPhone').textContent = `*** *** ${teYapearonData.phone.slice(-3)}`;
+
       const now = new Date();
       const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
       const month = months[now.getMonth()];
@@ -1327,31 +1297,16 @@
       const ampm = hour >= 12 ? 'p.m.' : 'a.m.';
       const hour12 = hour % 12 || 12;
 
-      showScreen('confirmContainer');
-      document.querySelector('.confirm-title').textContent = "¡Te yapearon!";
-      document.getElementById('confirmAmount').textContent = amount;
-      document.getElementById('confirmAmountWords').textContent = numeroALetras(parseFloat(amount));
-      document.getElementById('confirmName').textContent = sender;
       document.getElementById('confirmDate').textContent = `${day} ${month}. ${year}`;
       document.getElementById('confirmTime').textContent = `${hour12}:${minutes} ${ampm}`;
-      document.getElementById('confirmDateTime').textContent = `${day} ${month}. ${year}, ${hour12}:${minutes} ${ampm}`;
-      document.getElementById('confirmPhone').textContent = `*** *** ${phone.slice(-3)}`;
-      document.getElementById('confirmOp').textContent = Math.floor(Math.random() * 90000000 + 10000000);
+      document.getElementById('transDateTime').textContent = `${day} ${month}. ${year}, ${hour12}:${minutes} ${ampm}`;
+      document.getElementById('transOp').textContent = Math.floor(Math.random() * 90000000 + 10000000);
 
-      document.getElementById('code1').textContent = '';
-      document.getElementById('code2').textContent = '';
-      document.getElementById('code3').textContent = '';
-      document.querySelector('.security-code span').textContent = 'TRANSACCIÓN RECIBIDA';
-      document.querySelector('.security-code i').style.display = 'none';
-
-      document.querySelector('.digit').style.background = '#e8f5e8';
-      document.querySelector('.digit').nextElementSibling.style.background = '#e8f5e8';
-      document.querySelector('.digit').nextElementSibling.nextElementSibling.style.background = '#e8f5e8';
-
+      showScreen('confirmContainer');
       showSparkles();
 
-      // Registrar movimiento de entrada
-      addMovement(sender, phone, amount, 'entrada');
+      // Registrar como entrada
+      addMovement(teYapearonData.name, teYapearonData.phone, teYapearonData.amount, 'entrada');
     }
 
     function addMovement(name, phone, amount, type = 'salida') {
@@ -1405,13 +1360,6 @@
     }
 
     function goBack() {
-      // Restaurar estilos por defecto del recibo
-      document.querySelector('.confirm-title').textContent = "¡Yapeaste!";
-      document.querySelector('.security-code span').textContent = "CÓDIGO DE SEGURIDAD";
-      document.querySelector('.security-code i').style.display = 'block';
-      const digits = document.querySelectorAll('.digit');
-      digits.forEach(d => d.style.background = '#f0f0f0');
-
       showScreen('home');
     }
 
@@ -1429,7 +1377,7 @@
         userProfile.photo = url.trim();
       } else {
         const name = document.getElementById('editName').value || 'AnthZz Berrocal';
-        userProfile.photo = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=7b1fa2&color=fff`;
+        userProfile.photo = ` https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=7b1fa2&color=fff`;
       }
       document.getElementById('profilePic').src = userProfile.photo;
       document.getElementById('menuProfilePic').src = userProfile.photo;
