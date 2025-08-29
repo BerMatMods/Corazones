@@ -753,7 +753,70 @@
 </head>
 <body>
 
-  <div class="container">
+  <!-- ===== PANTALLA DE INICIO MORADA (BIENVENIDA) ===== -->
+  <div id="splashScreen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#7b1fa2; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:2000;">
+    <img src="https://i.postimg.cc/fRNJgKnJ/Icono-de-la-aplicaci-n-Yape-removebg-preview-1.png" alt="Logo Yape" style="width:120px; height:120px; margin-bottom:20px;">
+    <div style="color:white; font-size:0.8em; opacity:0.6;">By AnthZz_BerMatMods</div>
+  </div>
+
+  <!-- ===== PANTALLA DE LOGIN (CLAVE) ===== -->
+  <div id="loginScreen" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:1999;">
+    <!-- Mitad superior morada -->
+    <div style="height:50%; background:#7b1fa2; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; position:relative;">
+      <div style="color:white; font-size:1.1em; margin-bottom:20px;">Ingrese la clave</div>
+      <div id="loginCode" style="display:flex; gap:10px; margin-bottom:20px;">
+        <div class="login-digit" style="width:40px; height:40px; background:white; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; color:#333;">●</div>
+        <div class="login-digit" style="width:40px; height:40px; background:white; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; color:#333;">●</div>
+        <div class="login-digit" style="width:40px; height:40px; background:white; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; color:#333;">●</div>
+        <div class="login-digit" style="width:40px; height:40px; background:white; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; color:#333;">●</div>
+        <div class="login-digit" style="width:40px; height:40px; background:white; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; color:#333;">●</div>
+        <div class="login-digit" style="width:40px; height:40px; background:white; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; color:#333;">●</div>
+      </div>
+      <img src="https://i.postimg.cc/G3vQBXQp/1756472742500.jpg" alt="QR" style="width:100px; height:100px; border-radius:12px; margin-top:20px;">
+    </div>
+
+    <!-- Mitad inferior blanca -->
+    <div style="height:50%; background:white; display:grid; grid-template-rows:1fr 3fr 1fr; padding:20px;">
+      <!-- Botones arriba -->
+      <div style="display:flex; justify-content:space-between; font-size:0.9em;">
+        <span onclick="alert('Soporte del creador')" style="color:#7b1fa2; cursor:pointer;">Ayuda</span>
+        <span onclick="showScreen('infoScreen')" style="color:#7b1fa2; cursor:pointer;">Información de la app</span>
+      </div>
+
+      <!-- Teclado -->
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin:15px 0;">
+        <!-- Números -->
+        <div class="login-key" onclick="addDigit(1)" style="background:white; border:1px solid #e0e0e0; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5em; font-weight:bold; color:#333; cursor:pointer;">1</div>
+        <div class="login-key" onclick="addDigit(2)" style="background:white; border:1px solid #e0e0e0; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5em; font-weight:bold; color:#333; cursor:pointer;">2</div>
+        <div class="login-key" onclick="addDigit(3)" style="background:white; border:1px solid #e0e0e0; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5em; font-weight:bold; color:#333; cursor:pointer;">3</div>
+        <div class="login-key" onclick="addDigit(4)" style="background:white; border:1px solid #e0e0e0; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5em; font-weight:bold; color:#333; cursor:pointer;">4</div>
+        <div class="login-key" onclick="addDigit(5)" style="background:white; border:1px solid #e0e0e0; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5em; font-weight:bold; color:#333; cursor:pointer;">5</div>
+        <div class="login-key" onclick="addDigit(6)" style="background:white; border:1px solid #e0e0e0; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5em; font-weight:bold; color:#333; cursor:pointer;">6</div>
+        <div class="login-key" onclick="addDigit(7)" style="background:white; border:1px solid #e0e0e0; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5em; font-weight:bold; color:#333; cursor:pointer;">7</div>
+        <div class="login-key" onclick="addDigit(8)" style="background:white; border:1px solid #e0e0e0; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5em; font-weight:bold; color:#333; cursor:pointer;">8</div>
+        <div class="login-key" onclick="addDigit(9)" style="background:white; border:1px solid #e0e0e0; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5em; font-weight:bold; color:#333; cursor:pointer;">9</div>
+        <div style="visibility:hidden;"></div>
+        <div class="login-key" onclick="addDigit(0)" style="background:white; border:1px solid #e0e0e0; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5em; font-weight:bold; color:#333; cursor:pointer;">0</div>
+        <div class="login-key" onclick="deleteDigit()" style="background:#f5f5f5; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.2em; color:#888; cursor:pointer;">⌫</div>
+      </div>
+
+      <!-- Huella y olvidó clave -->
+      <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.9em; color:#666;">
+        <div style="display:flex; align-items:center; gap:6px; cursor:pointer;" onclick="alert('Huella digital simulada')">
+          <i class="fas fa-fingerprint" style="color:#7b1fa2;"></i>
+          <span>Huella</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:6px; cursor:pointer;" onclick="alert('Reconocimiento facial simulado')">
+          <i class="fas fa-user-circle" style="color:#7b1fa2;"></i>
+          <span>Facial</span>
+        </div>
+        <div onclick="alert('Código: 020807')" style="color:#7b1fa2; cursor:pointer;">¿Olvidó clave?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CONTENIDO PRINCIPAL (TU CÓDIGO ORIGINAL) ===== -->
+  <div class="container" id="mainContainer" style="display:none;">
 
     <!-- Menú hamburguesa -->
     <div class="menu-toggle" onclick="toggleMenu()">
@@ -1381,14 +1444,53 @@
     }
 
     window.addEventListener('load', () => {
-      showScreen('home');
-      renderMovements();
+      // Pantalla de bienvenida
+      setTimeout(() => {
+        document.getElementById('splashScreen').style.display = 'none';
+        document.getElementById('loginScreen').style.display = 'block';
+      }, 2000);
     });
   </script>
 
-  <!-- ===== AÑADIDO: RECIBO "TE YAPEARON" EDITABLE DESDE EL MENÚ ===== -->
+  <!-- ===== AÑADIDO: LOGIN Y TE YAPEARON ===== -->
   <script>
-    // Añadir opción al menú de 3 rayas
+    // Variables login
+    let loginCode = [];
+    const correctCode = "020807";
+
+    function addDigit(digit) {
+      if (loginCode.length < 6) {
+        loginCode.push(digit);
+        updateLoginDisplay();
+        if (loginCode.length === 6) {
+          const entered = loginCode.join('');
+          if (entered === correctCode) {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('mainContainer').style.display = 'block';
+            showScreen('home');
+            renderMovements();
+          } else {
+            alert('Clave incorrecta');
+            loginCode = [];
+            updateLoginDisplay();
+          }
+        }
+      }
+    }
+
+    function deleteDigit() {
+      loginCode.pop();
+      updateLoginDisplay();
+    }
+
+    function updateLoginDisplay() {
+      const digits = document.querySelectorAll('#loginCode .login-digit');
+      digits.forEach((d, i) => {
+        d.textContent = loginCode[i] ? '●' : '';
+      });
+    }
+
+    // "Te yapearon" editable
     document.addEventListener('DOMContentLoaded', () => {
       const menu = document.getElementById('menuSidebar');
       if (menu) {
@@ -1404,6 +1506,69 @@
         `;
         menu.appendChild(item);
       }
+    });
+
+    let receiveData = JSON.parse(localStorage.getItem('yape_receive_data')) || {
+      name: 'Carlos Ruiz',
+      amount: '100.00',
+      phone: '555',
+      code: ['5', '2', '8'],
+      operation: '12345678',
+      date: '24 ago. 2025',
+      time: '11:20 a.m.'
+    };
+
+    function loadReceiveData() {
+      if (document.getElementById('receiveAmount')) document.getElementById('receiveAmount').textContent = receiveData.amount;
+      if (document.getElementById('receiveName')) document.getElementById('receiveName').textContent = receiveData.name;
+      if (document.getElementById('receivePhone')) document.getElementById('receivePhone').textContent = `*** *** ${receiveData.phone}`;
+      if (document.getElementById('rcvCode1')) document.getElementById('rcvCode1').textContent = receiveData.code[0];
+      if (document.getElementById('rcvCode2')) document.getElementById('rcvCode2').textContent = receiveData.code[1];
+      if (document.getElementById('rcvCode3')) document.getElementById('rcvCode3').textContent = receiveData.code[2];
+      if (document.getElementById('receiveOp')) document.getElementById('receiveOp').textContent = receiveData.operation;
+      if (document.getElementById('receiveDate')) document.getElementById('receiveDate').textContent = receiveData.date;
+      if (document.getElementById('receiveTime')) document.getElementById('receiveTime').textContent = receiveData.time;
+
+      if (document.getElementById('editReceiveName')) {
+        document.getElementById('editReceiveName').value = receiveData.name;
+        document.getElementById('editReceiveAmount').value = receiveData.amount;
+        document.getElementById('editReceivePhone').value = receiveData.phone;
+        document.getElementById('editRcvCode1').value = receiveData.code[0];
+        document.getElementById('editRcvCode2').value = receiveData.code[1];
+        document.getElementById('editRcvCode3').value = receiveData.code[2];
+        document.getElementById('editReceiveOp').value = receiveData.operation;
+      }
+    }
+
+    function saveReceiveData() {
+      const name = (document.getElementById('editReceiveName').value || '').trim();
+      const amount = (document.getElementById('editReceiveAmount').value || '').trim();
+      const phone = (document.getElementById('editReceivePhone').value || '').trim();
+      const code1 = (document.getElementById('editRcvCode1').value || '').trim();
+      const code2 = (document.getElementById('editRcvCode2').value || '').trim();
+      const code3 = (document.getElementById('editRcvCode3').value || '').trim();
+      const operation = (document.getElementById('editReceiveOp').value || '').trim();
+
+      if (!name || !amount || !phone || !code1 || !code2 || !code3 || !operation) {
+        alert("Por favor, completa todos los campos");
+        return;
+      }
+
+      receiveData = { name, amount, phone, code: [code1, code2, code3], operation, date: receiveData.date, time: receiveData.time };
+      localStorage.setItem('yape_receive_data', JSON.stringify(receiveData));
+      loadReceiveData();
+      alert('✅ Recibo "Te yapearon" guardado');
+      goBack();
+    }
+
+    function showReceive() {
+      loadReceiveData();
+      showScreen('receiveContainer');
+      showSparkles();
+    }
+
+    window.addEventListener('load', () => {
+      loadReceiveData();
     });
   </script>
 
@@ -1482,71 +1647,5 @@
     <button class="big-button" onclick="saveReceiveData()">Guardar Cambios</button>
     <button class="big-button secondary" style="margin-top:10px;" onclick="goBack()">← Volver</button>
   </div>
-
-  <!-- SCRIPT: Funcionalidad "Te yapearon" -->
-  <script>
-    let receiveData = JSON.parse(localStorage.getItem('yape_receive_data')) || {
-      name: 'Carlos Ruiz',
-      amount: '100.00',
-      phone: '555',
-      code: ['5', '2', '8'],
-      operation: '12345678',
-      date: '24 ago. 2025',
-      time: '11:20 a.m.'
-    };
-
-    function loadReceiveData() {
-      if (document.getElementById('receiveAmount')) document.getElementById('receiveAmount').textContent = receiveData.amount;
-      if (document.getElementById('receiveName')) document.getElementById('receiveName').textContent = receiveData.name;
-      if (document.getElementById('receivePhone')) document.getElementById('receivePhone').textContent = `*** *** ${receiveData.phone}`;
-      if (document.getElementById('rcvCode1')) document.getElementById('rcvCode1').textContent = receiveData.code[0];
-      if (document.getElementById('rcvCode2')) document.getElementById('rcvCode2').textContent = receiveData.code[1];
-      if (document.getElementById('rcvCode3')) document.getElementById('rcvCode3').textContent = receiveData.code[2];
-      if (document.getElementById('receiveOp')) document.getElementById('receiveOp').textContent = receiveData.operation;
-      if (document.getElementById('receiveDate')) document.getElementById('receiveDate').textContent = receiveData.date;
-      if (document.getElementById('receiveTime')) document.getElementById('receiveTime').textContent = receiveData.time;
-
-      if (document.getElementById('editReceiveName')) {
-        document.getElementById('editReceiveName').value = receiveData.name;
-        document.getElementById('editReceiveAmount').value = receiveData.amount;
-        document.getElementById('editReceivePhone').value = receiveData.phone;
-        document.getElementById('editRcvCode1').value = receiveData.code[0];
-        document.getElementById('editRcvCode2').value = receiveData.code[1];
-        document.getElementById('editRcvCode3').value = receiveData.code[2];
-        document.getElementById('editReceiveOp').value = receiveData.operation;
-      }
-    }
-
-    function saveReceiveData() {
-      const name = (document.getElementById('editReceiveName').value || '').trim();
-      const amount = (document.getElementById('editReceiveAmount').value || '').trim();
-      const phone = (document.getElementById('editReceivePhone').value || '').trim();
-      const code1 = (document.getElementById('editRcvCode1').value || '').trim();
-      const code2 = (document.getElementById('editRcvCode2').value || '').trim();
-      const code3 = (document.getElementById('editRcvCode3').value || '').trim();
-      const operation = (document.getElementById('editReceiveOp').value || '').trim();
-
-      if (!name || !amount || !phone || !code1 || !code2 || !code3 || !operation) {
-        alert("Por favor, completa todos los campos");
-        return;
-      }
-
-      receiveData = { name, amount, phone, code: [code1, code2, code3], operation, date: receiveData.date, time: receiveData.time };
-      localStorage.setItem('yape_receive_data', JSON.stringify(receiveData));
-      loadReceiveData();
-      alert('✅ Recibo "Te yapearon" guardado');
-      goBack();
-    }
-
-    function showReceive() {
-      loadReceiveData();
-      showScreen('receiveContainer');
-      showSparkles();
-    }
-
-    window.addEventListener('load', () => {
-      loadReceiveData();
-    });
-  </script>
 </body>
 </html>
