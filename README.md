@@ -2,247 +2,390 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Día de las Flores Amarillas</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Yape Replica Educativa</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;display=swap">
   <style>
-    :root {
-      --fondo: #181825;
-      --amarillo-neon: #ffe900;
-      --amarillo-brillo: #fff771;
-      --hoja: #69e26c;
-      --tallo: #2cce36;
-      --mariposa-ala: #fffb00;
-      --mariposa-cuerpo: #ffae00;
-    }
     body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: #f2f3f7;
       margin: 0;
       padding: 0;
-      background: var(--fondo);
-      min-height: 100vh;
-      overflow-x: hidden;
-      font-family: 'Montserrat', sans-serif;
+      color: #333;
     }
-    /* Animación de escritura */
-    .carta {
-      position: absolute;
-      top: 10vw;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255,255,255,0.1);
-      border-radius: 2em;
-      box-shadow: 0 8px 32px rgba(255,255,100,0.16);
-      padding: 2.5em 3em;
-      max-width: 500px;
-      width: 90vw;
-      color: #fff;
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.2em;
-      letter-spacing: 0.07em;
-      border: 3px solid var(--amarillo-brillo);
-      backdrop-filter: blur(5px);
+    .container {
+      max-width: 400px;
+      background: #fff;
+      margin: 32px auto;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       overflow: hidden;
+      border: 1px solid #e6e6e6;
     }
-    .carta span {
-      opacity: 0;
-      animation: escribir 0.17s forwards;
+    .header {
+      background: linear-gradient(90deg,#30e57a 0%, #0ac96b 100%);
+      color: #fff;
+      padding: 32px 24px 20px 24px;
+      text-align: left;
+      position: relative;
     }
-    .carta span:nth-child(n) { animation-delay: calc(var(--i) * 0.09s); }
-    @keyframes escribir {
-      to { opacity: 1; }
+    .profile {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
     }
-    /* Flores */
-    .flores-container {
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #fff;
+      object-fit: cover;
+      margin-right: 14px;
+    }
+    .profile-name {
+      font-size: 1.3em;
+      font-weight: 700;
+      margin: 0;
+      display: flex;
+      align-items: center;
+    }
+    .edit-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1em;
+      margin-left: 8px;
+      cursor: pointer;
+      outline: none;
+      transition: opacity .1s;
+      opacity: 0.7;
+    }
+    .edit-btn:hover { opacity: 1; }
+    .balance {
+      font-size: 2em;
+      font-weight: 700;
+      margin: 12px 0 0 0;
+      letter-spacing: 1px;
+    }
+    .label {
+      font-size: 1em;
+      opacity: 0.85;
+    }
+    .actions {
+      display: flex;
+      justify-content: space-around;
+      background: #fff;
+      padding: 18px 0;
+      border-bottom: 1px solid #f2f3f7;
+    }
+    .action-btn {
+      background: linear-gradient(90deg,#30e57a 0%, #15e1b7 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1em;
+      font-weight: 700;
+      padding: 13px 24px;
+      cursor: pointer;
+      box-shadow: 0 1px 6px rgba(44,199,120,0.10);
+      transition: background .2s;
+    }
+    .action-btn:active {
+      background: linear-gradient(90deg,#15e1b7 0%, #30e57a 100%);
+    }
+    .historial-title {
+      font-size: 1.1em;
+      font-weight: 700;
+      margin: 16px 0 6px 24px;
+    }
+    .historial {
+      padding: 0 24px 24px 24px;
+      background: #fff;
+    }
+    .historial-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .historial-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #f2f3f7;
+    }
+    .historial-item:last-child { border-bottom: none; }
+    .historial-detail {
+      flex: 1;
+    }
+    .historial-date {
+      font-size: 0.93em;
+      color: #888;
+    }
+    .historial-amount {
+      font-weight: 700;
+      font-size: 1em;
+      color: #0ac96b;
+      min-width: 70px;
+      text-align: right;
+    }
+    /* Modal */
+    .modal-bg {
       position: fixed;
-      bottom: 0; left: 0; right: 0;
-      height: 48vh;
-      pointer-events: none;
-      z-index: 1;
+      top:0;left:0;right:0;bottom:0;
+      background: rgba(0,0,0,0.24);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
     }
-    .flor {
+    .modal {
+      background: #fff;
+      padding: 28px 18px 18px 18px;
+      border-radius: 18px;
+      max-width: 340px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      text-align: center;
+      position: relative;
+    }
+    .modal input[type="text"], .modal input[type="number"] {
+      padding: 8px 12px;
+      margin: 12px 0 20px 0;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+      width: 90%;
+      font-size: 1em;
+      font-family: inherit;
+    }
+    .modal .modal-btn {
+      background: linear-gradient(90deg,#30e57a 0%, #15e1b7 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: 700;
+      padding: 8px 22px;
+      cursor: pointer;
+      margin: 0 2px;
+      box-shadow: 0 1px 6px rgba(44,199,120,0.13);
+    }
+    .modal-close {
       position: absolute;
-      bottom: 0;
-      transform-origin: bottom center;
-      will-change: transform;
-      animation: crecer var(--tiempo-flor, 2s) cubic-bezier(.32,1.28,.54,.88) forwards;
-      opacity: 0;
-      filter: drop-shadow(0 0 14px var(--amarillo-brillo));
+      top:12px;right:12px;
+      background:none;
+      border:none;
+      font-size:1.3em;
+      color:#888;
+      cursor:pointer;
     }
-    @keyframes crecer {
-      0% { transform: scaleY(0.1) scaleX(0.1) translateY(60px); opacity: 0;}
-      60% { opacity: 1;}
-      100% { transform: scaleY(1) scaleX(1) translateY(0); opacity: 1;}
-    }
-    /* Estilos SVG flor */
-    .flor svg {
-      display: block;
-      width: var(--tam-flor, 80px);
-      height: var(--tam-flor, 80px);
-    }
-    /* Mariposas */
-    .mariposa {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 48px;
-      height: 48px;
-      z-index: 2;
-      animation: vuelo-mariposa 9s linear infinite;
-      will-change: transform;
-      pointer-events: none;
-    }
-    /* Animación aleteo */
-    .mariposa .ala {
-      transform-origin: 50% 50%;
-      animation: aleteo-ala 0.45s infinite alternate;
-    }
-    @keyframes aleteo-ala {
-      to { transform: scaleY(1.14) rotate(-7deg);}
-    }
-    /* Animación de vuelo (trayectoria) */
-    @keyframes vuelo-mariposa {
-      0% { transform: translate(var(--x1), var(--y1)) scale(1);}
-      15% { transform: translate(var(--x2), var(--y2)) scale(1.01);}
-      30% { transform: translate(var(--x3), var(--y3)) scale(1);}
-      45% { transform: translate(var(--x4), var(--y4)) scale(1.05);}
-      60% { transform: translate(var(--x5), var(--y5)) scale(1);}
-      75% { transform: translate(var(--x6), var(--y6)) scale(1.02);}
-      100% { transform: translate(var(--x1), var(--y1)) scale(1);}
+    @media (max-width:480px) {
+      .container { max-width: 98vw; }
+      .header { padding: 24px 12px 12px 12px; }
+      .historial { padding: 0 12px 20px 12px; }
     }
   </style>
 </head>
 <body>
-  <div class="flores-container" id="flores"></div>
-  <div id="mariposas"></div>
-  <div class="carta" id="carta"></div>
+  <div class="container">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="profile">
+        <img src="https://ui-avatars.com/api/?background=0ac96b&color=fff&name=Y" alt="Avatar" class="avatar" id="avatar">
+        <span class="profile-name" id="profileName">
+          Usuario Yape
+          <button class="edit-btn" title="Editar nombre" id="editNameBtn">&#9998;</button>
+        </span>
+      </div>
+      <div class="label">Saldo disponible</div>
+      <div class="balance" id="balance">S/ 220.00</div>
+    </div>
+    <!-- ACCIONES -->
+    <div class="actions">
+      <button class="action-btn" id="sendBtn">Enviar</button>
+      <button class="action-btn" id="receiveBtn">Recibir</button>
+    </div>
+    <!-- HISTORIAL -->
+    <div>
+      <div class="historial-title">Historial</div>
+      <div class="historial">
+        <ul class="historial-list" id="historialList">
+          <!-- Items generados por JS -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL EDITAR NOMBRE -->
+  <div class="modal-bg" id="editModalBg">
+    <div class="modal">
+      <button class="modal-close" id="closeEditModal">&times;</button>
+      <h3>Editar nombre</h3>
+      <input type="text" id="editNameInput" maxlength="30" />
+      <br>
+      <button class="modal-btn" id="saveNameBtn">Guardar</button>
+    </div>
+  </div>
+
+  <!-- MODAL ENVIAR DINERO -->
+  <div class="modal-bg" id="sendModalBg">
+    <div class="modal">
+      <button class="modal-close" id="closeSendModal">&times;</button>
+      <h3>Enviar dinero</h3>
+      <input type="text" id="sendToInput" placeholder="Nombre destinatario" maxlength="30" />
+      <input type="number" id="sendAmountInput" min="1" step="0.01" placeholder="Monto S/" />
+      <br>
+      <button class="modal-btn" id="confirmSendBtn">Confirmar</button>
+    </div>
+  </div>
+
+  <!-- MODAL RECIBIR DINERO -->
+  <div class="modal-bg" id="receiveModalBg">
+    <div class="modal">
+      <button class="modal-close" id="closeReceiveModal">&times;</button>
+      <h3>Recibir dinero</h3>
+      <input type="text" id="receiveFromInput" placeholder="Nombre remitente" maxlength="30" />
+      <input type="number" id="receiveAmountInput" min="1" step="0.01" placeholder="Monto S/" />
+      <br>
+      <button class="modal-btn" id="confirmReceiveBtn">Confirmar</button>
+    </div>
+  </div>
+
   <script>
-    // CARTA animada
-    const textoCarta = `
-      ¡Feliz Día de las Flores Amarillas!<br>
-      Hoy el mundo se llena de luz, esperanza y alegría.<br>
-      Estas flores son símbolo de amor, sueños y nuevos comienzos.<br>
-      Que cada pétalo te recuerde lo especial que eres y que la vida florece con tu sonrisa.<br>
-      ¡Que el amor y la magia te acompañen siempre!
-    `;
-    const cartaDiv = document.getElementById('carta');
-    cartaDiv.innerHTML = '';
-    let i = 0;
-    for (const char of textoCarta) {
-      const span = document.createElement('span');
-      span.textContent = char;
-      if (char === '<') { // manejar <br>
-        const br = document.createElement('br');
-        cartaDiv.appendChild(br);
-        continue;
+    // --- Datos iniciales
+    let userName = localStorage.getItem('yape_user_name') || "Usuario Yape";
+    let balance = parseFloat(localStorage.getItem('yape_balance')) || 220.00;
+    let historial = JSON.parse(localStorage.getItem('yape_historial') || "[]");
+
+    // --- Elementos
+    const profileNameEl = document.getElementById('profileName');
+    const balanceEl = document.getElementById('balance');
+    const historialListEl = document.getElementById('historialList');
+    const avatarEl = document.getElementById('avatar');
+
+    // --- Renderizar nombre y balance
+    function renderProfile() {
+      profileNameEl.childNodes[0].nodeValue = userName;
+      avatarEl.src = `https://ui-avatars.com/api/?background=0ac96b&color=fff&name=${encodeURIComponent(userName[0] || "Y")}`;
+    }
+    function renderBalance() {
+      balanceEl.textContent = `S/ ${balance.toFixed(2)}`;
+    }
+    function renderHistorial() {
+      historialListEl.innerHTML = "";
+      if (historial.length === 0) {
+        historialListEl.innerHTML = `<li style="color:#999;font-size:1em;">Sin movimientos aún</li>`;
+        return;
       }
-      span.style.setProperty('--i', i);
-      cartaDiv.appendChild(span);
-      i += 1;
+      historial.slice().reverse().forEach(item => {
+        const li = document.createElement('li');
+        li.className = "historial-item";
+        li.innerHTML = `
+          <div class="historial-detail">
+            ${item.type === 'send' ? 'Enviaste a' : 'Recibiste de'}
+            <b>${item.name}</b>
+            <div class="historial-date">${item.date}</div>
+          </div>
+          <div class="historial-amount" style="color:${item.type === 'send' ? '#f44' : '#0ac96b'};">
+            ${item.type === 'send' ? '-' : '+'} S/ ${item.amount.toFixed(2)}
+          </div>
+        `;
+        historialListEl.appendChild(li);
+      });
     }
 
-    // GENERAR FLORES AMARILLAS
-    const floresDiv = document.getElementById('flores');
-    const floresParams = [
-      // x%, tamaño, altura, tiempo animación
-      [5,  68, 110, 2.1], [12, 100, 160, 2.4], [17, 80, 140, 2.7], [20, 60, 115, 1.9],
-      [25, 74, 130, 2.5], [33, 120, 180, 2.8], [38, 95, 140, 2.6], [44, 66, 100, 2.2],
-      [50, 105, 170, 3.0], [56, 70, 120, 2.3], [61, 90, 140, 2.6], [67, 65, 110, 2.0],
-      [73, 86, 150, 2.7], [80, 110, 180, 2.9], [87, 78, 120, 2.5], [93, 60, 100, 2.1]
-    ];
-    floresParams.forEach((f, idx) => {
-      const flor = document.createElement('div');
-      flor.className = 'flor';
-      flor.style.left = `${f[0]}vw`;
-      flor.style.setProperty('--tam-flor', `${f[1]}px`);
-      flor.style.setProperty('--tiempo-flor', `${f[3]}s`);
-      flor.innerHTML = `
-      <svg viewBox="0 0 80 180">
-        <!-- Tallo -->
-        <rect x="38" y="60" width="4" height="${f[2]}" rx="2" fill="var(--tallo)" />
-        <!-- Hojas -->
-        <ellipse cx="32" cy="90" rx="8" ry="24" fill="var(--hoja)" transform="rotate(-25 32 90)" opacity="0.8"/>
-        <ellipse cx="48" cy="120" rx="7" ry="22" fill="var(--hoja)" transform="rotate(18 48 120)" opacity="0.7"/>
-        <!-- Flor amarilla (pétalos) -->
-        <g>
-          ${Array.from({length: 7}, (_,i)=>`
-            <ellipse cx="40" cy="45" rx="14" ry="20"
-              fill="url(#petalo${idx})"
-              transform="rotate(${i*360/7} 40 45)" />
-            <defs>
-              <radialGradient id="petalo${idx}" cx="50%" cy="50%" r="60%">
-                <stop offset="0%" stop-color="var(--amarillo-brillo)" />
-                <stop offset="60%" stop-color="var(--amarillo-neon)" />
-                <stop offset="100%" stop-color="#fff200" />
-              </radialGradient>
-            </defs>
-          `).join('')}
-          <!-- Centro -->
-          <circle cx="40" cy="45" r="11"
-            fill="yellow"
-            stroke="#fff800"
-            stroke-width="3"
-            filter="url(#neon-centro${idx})"
-          />
-          <defs>
-            <filter id="neon-centro${idx}">
-              <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#fff93e"/>
-            </filter>
-          </defs>
-        </g>
-      </svg>
-      `;
-      floresDiv.appendChild(flor);
-    });
+    // --- Guardar datos
+    function saveData() {
+      localStorage.setItem('yape_user_name', userName);
+      localStorage.setItem('yape_balance', balance);
+      localStorage.setItem('yape_historial', JSON.stringify(historial));
+    }
 
-    // Animar mariposas
-    function crearMariposa(num, colorAla, colorCuerpo) {
-      const mariposa = document.createElement('div');
-      mariposa.className = 'mariposa';
-      // Trayectorias variadas por mariposa
-      const trayectorias = [
-        [ '7vw', '18vh', '13vw', '10vh', '24vw', '24vh', '35vw', '12vh', '47vw', '21vh', '24vw', '29vh' ],
-        [ '63vw', '9vh', '70vw', '24vh', '80vw', '9vh', '90vw', '30vh', '80vw', '35vh', '60vw', '18vh' ],
-        [ '28vw', '37vh', '44vw', '21vh', '52vw', '31vh', '56vw', '8vh', '62vw', '33vh', '48vw', '16vh' ],
-        [ '88vw', '42vh', '77vw', '27vh', '93vw', '12vh', '81vw', '17vh', '72vw', '39vh', '90vw', '32vh' ]
-      ];
-      const t = trayectorias[num % trayectorias.length];
-      mariposa.style.setProperty('--x1', t[0]);
-      mariposa.style.setProperty('--y1', t[1]);
-      mariposa.style.setProperty('--x2', t[2]);
-      mariposa.style.setProperty('--y2', t[3]);
-      mariposa.style.setProperty('--x3', t[4]);
-      mariposa.style.setProperty('--y3', t[5]);
-      mariposa.style.setProperty('--x4', t[6]);
-      mariposa.style.setProperty('--y4', t[7]);
-      mariposa.style.setProperty('--x5', t[8]);
-      mariposa.style.setProperty('--y5', t[9]);
-      mariposa.style.setProperty('--x6', t[10]);
-      mariposa.style.setProperty('--y6', t[11]);
-      mariposa.style.animationDelay = `${num*1.7}s`;
-      mariposa.innerHTML = `
-        <svg viewBox="0 0 48 48">
-          <g>
-            <!-- Alas -->
-            <ellipse class="ala" cx="16" cy="18" rx="15" ry="12" fill="${colorAla}" opacity="0.96"/>
-            <ellipse class="ala" cx="32" cy="18" rx="15" ry="12" fill="${colorAla}" opacity="0.96"/>
-            <!-- Cuerpo -->
-            <rect x="22" y="18" width="4.5" height="17" rx="2.3" fill="${colorCuerpo}" />
-            <!-- Antenas -->
-            <path d="M24 18 Q23 11 16 8" stroke="#f4b800" stroke-width="1.7" fill="none"/>
-            <path d="M24 18 Q25 10 32 7" stroke="#f4b800" stroke-width="1.7" fill="none"/>
-            <!-- Cabeza -->
-            <ellipse cx="24" cy="17" rx="3.2" ry="3.7" fill="${colorCuerpo}" />
-          </g>
-        </svg>
-      `;
-      return mariposa;
+    // --- Modal helpers
+    function openModal(id) {
+      document.getElementById(id).style.display = "flex";
     }
-    const mariposasDiv = document.getElementById('mariposas');
-    for (let m=0; m<6; m++) {
-      mariposasDiv.appendChild(crearMariposa(m,
-        m%2 ? 'gold' : 'var(--mariposa-ala)',
-        m%2 ? 'orange' : 'var(--mariposa-cuerpo)'
-      ));
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
     }
+
+    // --- Editar nombre
+    document.getElementById('editNameBtn').onclick = () => {
+      document.getElementById('editNameInput').value = userName;
+      openModal('editModalBg');
+      setTimeout(() => document.getElementById('editNameInput').focus(), 100);
+    };
+    document.getElementById('closeEditModal').onclick = () => closeModal('editModalBg');
+    document.getElementById('saveNameBtn').onclick = () => {
+      const newName = document.getElementById('editNameInput').value.trim();
+      if (newName.length >= 2) {
+        userName = newName;
+        renderProfile();
+        saveData();
+        closeModal('editModalBg');
+      }
+    };
+
+    // --- Enviar dinero
+    document.getElementById('sendBtn').onclick = () => {
+      document.getElementById('sendToInput').value = "";
+      document.getElementById('sendAmountInput').value = "";
+      openModal('sendModalBg');
+      setTimeout(() => document.getElementById('sendToInput').focus(), 100);
+    };
+    document.getElementById('closeSendModal').onclick = () => closeModal('sendModalBg');
+    document.getElementById('confirmSendBtn').onclick = () => {
+      const to = document.getElementById('sendToInput').value.trim();
+      const amount = parseFloat(document.getElementById('sendAmountInput').value);
+      if (to.length >= 2 && amount > 0 && amount <= balance) {
+        balance -= amount;
+        historial.push({
+          type: 'send',
+          name: to,
+          amount: amount,
+          date: new Date().toLocaleString('es-PE', { day:'2-digit', month:'2-digit', year:'2-digit', hour:'2-digit', minute:'2-digit' }),
+        });
+        renderBalance();
+        renderHistorial();
+        saveData();
+        closeModal('sendModalBg');
+      } else {
+        alert("Revisa los datos. El monto no puede ser mayor al saldo.");
+      }
+    };
+
+    // --- Recibir dinero
+    document.getElementById('receiveBtn').onclick = () => {
+      document.getElementById('receiveFromInput').value = "";
+      document.getElementById('receiveAmountInput').value = "";
+      openModal('receiveModalBg');
+      setTimeout(() => document.getElementById('receiveFromInput').focus(), 100);
+    };
+    document.getElementById('closeReceiveModal').onclick = () => closeModal('receiveModalBg');
+    document.getElementById('confirmReceiveBtn').onclick = () => {
+      const from = document.getElementById('receiveFromInput').value.trim();
+      const amount = parseFloat(document.getElementById('receiveAmountInput').value);
+      if (from.length >= 2 && amount > 0) {
+        balance += amount;
+        historial.push({
+          type: 'receive',
+          name: from,
+          amount: amount,
+          date: new Date().toLocaleString('es-PE', { day:'2-digit', month:'2-digit', year:'2-digit', hour:'2-digit', minute:'2-digit' }),
+        });
+        renderBalance();
+        renderHistorial();
+        saveData();
+        closeModal('receiveModalBg');
+      } else {
+        alert("Revisa los datos.");
+      }
+    };
+
+    // --- Inicialización
+    renderProfile();
+    renderBalance();
+    renderHistorial();
   </script>
 </body>
 </html>
