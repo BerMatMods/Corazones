@@ -1,199 +1,248 @@
-<!DOCTYPE html>
+
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Día de las Flores Amarillas ✨🌼</title>
+  <title>Día de las Flores Amarillas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --fondo: #181825;
+      --amarillo-neon: #ffe900;
+      --amarillo-brillo: #fff771;
+      --hoja: #69e26c;
+      --tallo: #2cce36;
+      --mariposa-ala: #fffb00;
+      --mariposa-cuerpo: #ffae00;
+    }
     body {
-      background: linear-gradient(135deg, #2e026d 0%, #ffea00 100%);
-      min-height: 100vh;
       margin: 0;
+      padding: 0;
+      background: var(--fondo);
+      min-height: 100vh;
+      overflow-x: hidden;
       font-family: 'Montserrat', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
+    }
+    /* Animación de escritura */
+    .carta {
+      position: absolute;
+      top: 10vw;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.1);
+      border-radius: 2em;
+      box-shadow: 0 8px 32px rgba(255,255,100,0.16);
+      padding: 2.5em 3em;
+      max-width: 500px;
+      width: 90vw;
+      color: #fff;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2em;
+      letter-spacing: 0.07em;
+      border: 3px solid var(--amarillo-brillo);
+      backdrop-filter: blur(5px);
       overflow: hidden;
     }
-    h1 {
-      color: #fff84b;
-      text-shadow: 0 0 10px #ffd700, 0 0 20px #fafa63;
-      font-size: 2.8em;
-      letter-spacing: 2px;
-      margin-top: 40px;
-      margin-bottom: 10px;
+    .carta span {
+      opacity: 0;
+      animation: escribir 0.17s forwards;
     }
-    p {
-      color: #fff;
-      font-size: 1.3em;
-      text-shadow: 0 0 8px #ffd700;
-      margin-bottom: 40px;
-      background: rgba(50, 50, 50, 0.3);
-      padding: 12px 28px;
-      border-radius: 32px;
-      border: 2px solid #fff84b;
-      box-shadow: 0 0 18px #ffd70044;
-      max-width: 600px;
+    .carta span:nth-child(n) { animation-delay: calc(var(--i) * 0.09s); }
+    @keyframes escribir {
+      to { opacity: 1; }
     }
-    .flowers {
-      position: relative;
-      width: 85vw;
-      height: 55vh;
-      margin-bottom: 40px;
+    /* Flores */
+    .flores-container {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 48vh;
+      pointer-events: none;
+      z-index: 1;
     }
-    .flower {
+    .flor {
       position: absolute;
-      width: 60px;
-      height: 60px;
-      animation: neonGlow 2s infinite alternate;
-      filter: drop-shadow(0 0 12px #ffe400);
-      cursor: pointer;
-      transition: transform 0.2s;
+      bottom: 0;
+      transform-origin: bottom center;
+      will-change: transform;
+      animation: crecer var(--tiempo-flor, 2s) cubic-bezier(.32,1.28,.54,.88) forwards;
+      opacity: 0;
+      filter: drop-shadow(0 0 14px var(--amarillo-brillo));
     }
-    .flower:hover {
-      transform: scale(1.25) rotate(8deg);
-      filter: drop-shadow(0 0 28px #fff200) drop-shadow(0 0 8px #fff200);
+    @keyframes crecer {
+      0% { transform: scaleY(0.1) scaleX(0.1) translateY(60px); opacity: 0;}
+      60% { opacity: 1;}
+      100% { transform: scaleY(1) scaleX(1) translateY(0); opacity: 1;}
     }
-    /* Animación de neón */
-    @keyframes neonGlow {
-      0% { filter: drop-shadow(0 0 8px #ffd700); }
-      100% { filter: drop-shadow(0 0 20px #fff200); }
+    /* Estilos SVG flor */
+    .flor svg {
+      display: block;
+      width: var(--tam-flor, 80px);
+      height: var(--tam-flor, 80px);
     }
-    /* Flor con CSS puro */
-    .petal {
+    /* Mariposas */
+    .mariposa {
       position: absolute;
-      width: 24px;
-      height: 36px;
-      border-radius: 50% 50% 40% 40%;
-      background: linear-gradient(135deg, #fff84b 60%, #ffd700 100%);
-      box-shadow: 0 0 12px #fff84b;
-      border: 2px solid #ffec63;
+      left: 0;
+      top: 0;
+      width: 48px;
+      height: 48px;
       z-index: 2;
+      animation: vuelo-mariposa 9s linear infinite;
+      will-change: transform;
+      pointer-events: none;
     }
-    .petal1 { transform: rotate(0deg) translateY(-18px);}
-    .petal2 { transform: rotate(72deg) translateY(-18px);}
-    .petal3 { transform: rotate(144deg) translateY(-18px);}
-    .petal4 { transform: rotate(216deg) translateY(-18px);}
-    .petal5 { transform: rotate(288deg) translateY(-18px);}
-    .center {
-      position: absolute;
-      top: 18px; left: 18px;
-      width: 24px; height: 24px;
-      background: radial-gradient(circle, #ffe400 75%, #fff200 100%);
-      border-radius: 50%;
-      border: 3px solid #fff84b;
-      box-shadow: 0 0 16px #fff84b, 0 0 30px #ffd700aa;
-      z-index: 3;
+    /* Animación aleteo */
+    .mariposa .ala {
+      transform-origin: 50% 50%;
+      animation: aleteo-ala 0.45s infinite alternate;
     }
-    /* Tallo */
-    .stem {
-      position: absolute;
-      left: 28px;
-      top: 54px;
-      width: 4px; height: 36px;
-      background: linear-gradient(180deg, #e3ff3c 30%, #46e800 100%);
-      border-radius: 2px;
-      z-index: 1;
-      box-shadow: 0 0 8px #bfff00;
+    @keyframes aleteo-ala {
+      to { transform: scaleY(1.14) rotate(-7deg);}
     }
-    /* Hoja */
-    .leaf {
-      position: absolute;
-      left: 30px; top: 75px;
-      width: 16px; height: 10px;
-      background: linear-gradient(90deg, #bfff00 80%, #46e800 100%);
-      border-radius: 50% 50% 25% 25%;
-      transform: rotate(-25deg);
-      box-shadow: 0 0 6px #bfff00;
-      z-index: 1;
-    }
-
-    /* Responsive */
-    @media (max-width: 700px) {
-      h1 { font-size: 1.5em;}
-      .flowers { width: 98vw; height: 40vh;}
-      .flower { width: 38px; height: 38px;}
+    /* Animación de vuelo (trayectoria) */
+    @keyframes vuelo-mariposa {
+      0% { transform: translate(var(--x1), var(--y1)) scale(1);}
+      15% { transform: translate(var(--x2), var(--y2)) scale(1.01);}
+      30% { transform: translate(var(--x3), var(--y3)) scale(1);}
+      45% { transform: translate(var(--x4), var(--y4)) scale(1.05);}
+      60% { transform: translate(var(--x5), var(--y5)) scale(1);}
+      75% { transform: translate(var(--x6), var(--y6)) scale(1.02);}
+      100% { transform: translate(var(--x1), var(--y1)) scale(1);}
     }
   </style>
 </head>
 <body>
-  <h1>✨ Día de las Flores Amarillas ✨</h1>
-  <p>
-    ¡Hoy celebramos el Día de las Flores Amarillas! Te envío este detalle lleno de flores neón para recordarte que la alegría y el cariño florecen como el sol. ¡Que tu día sea brillante y especial! 🌼💛
-  </p>
-  <div class="flowers">
-    <!-- Se generan varias flores en posiciones diferentes -->
-    <div class="flower" style="top:16%; left:8%;">
-      <div class="petal petal1"></div>
-      <div class="petal petal2"></div>
-      <div class="petal petal3"></div>
-      <div class="petal petal4"></div>
-      <div class="petal petal5"></div>
-      <div class="center"></div>
-      <div class="stem"></div>
-      <div class="leaf"></div>
-    </div>
-    <div class="flower" style="top:40%; left:17%;">
-      <div class="petal petal1"></div>
-      <div class="petal petal2"></div>
-      <div class="petal petal3"></div>
-      <div class="petal petal4"></div>
-      <div class="petal petal5"></div>
-      <div class="center"></div>
-      <div class="stem"></div>
-      <div class="leaf"></div>
-    </div>
-    <div class="flower" style="top:25%; left:35%;">
-      <div class="petal petal1"></div>
-      <div class="petal petal2"></div>
-      <div class="petal petal3"></div>
-      <div class="petal petal4"></div>
-      <div class="petal petal5"></div>
-      <div class="center"></div>
-      <div class="stem"></div>
-      <div class="leaf"></div>
-    </div>
-    <div class="flower" style="top:52%; left:55%;">
-      <div class="petal petal1"></div>
-      <div class="petal petal2"></div>
-      <div class="petal petal3"></div>
-      <div class="petal petal4"></div>
-      <div class="petal petal5"></div>
-      <div class="center"></div>
-      <div class="stem"></div>
-      <div class="leaf"></div>
-    </div>
-    <div class="flower" style="top:10%; left:68%;">
-      <div class="petal petal1"></div>
-      <div class="petal petal2"></div>
-      <div class="petal petal3"></div>
-      <div class="petal petal4"></div>
-      <div class="petal petal5"></div>
-      <div class="center"></div>
-      <div class="stem"></div>
-      <div class="leaf"></div>
-    </div>
-    <div class="flower" style="top:60%; left:80%;">
-      <div class="petal petal1"></div>
-      <div class="petal petal2"></div>
-      <div class="petal petal3"></div>
-      <div class="petal petal4"></div>
-      <div class="petal petal5"></div>
-      <div class="center"></div>
-      <div class="stem"></div>
-      <div class="leaf"></div>
-    </div>
-    <div class="flower" style="top:35%; left:85%;">
-      <div class="petal petal1"></div>
-      <div class="petal petal2"></div>
-      <div class="petal petal3"></div>
-      <div class="petal petal4"></div>
-      <div class="petal petal5"></div>
-      <div class="center"></div>
-      <div class="stem"></div>
-      <div class="leaf"></div>
-    </div>
-    <!-- Puedes copiar y pegar más flores cambiando las posiciones top/left -->
-  </div>
+  <div class="flores-container" id="flores"></div>
+  <div id="mariposas"></div>
+  <div class="carta" id="carta"></div>
+  <script>
+    // CARTA animada
+    const textoCarta = `
+      ¡Feliz Día de las Flores Amarillas!<br>
+      Hoy el mundo se llena de luz, esperanza y alegría.<br>
+      Estas flores son símbolo de amor, sueños y nuevos comienzos.<br>
+      Que cada pétalo te recuerde lo especial que eres y que la vida florece con tu sonrisa.<br>
+      ¡Que el amor y la magia te acompañen siempre!
+    `;
+    const cartaDiv = document.getElementById('carta');
+    cartaDiv.innerHTML = '';
+    let i = 0;
+    for (const char of textoCarta) {
+      const span = document.createElement('span');
+      span.textContent = char;
+      if (char === '<') { // manejar <br>
+        const br = document.createElement('br');
+        cartaDiv.appendChild(br);
+        continue;
+      }
+      span.style.setProperty('--i', i);
+      cartaDiv.appendChild(span);
+      i += 1;
+    }
+
+    // GENERAR FLORES AMARILLAS
+    const floresDiv = document.getElementById('flores');
+    const floresParams = [
+      // x%, tamaño, altura, tiempo animación
+      [5,  68, 110, 2.1], [12, 100, 160, 2.4], [17, 80, 140, 2.7], [20, 60, 115, 1.9],
+      [25, 74, 130, 2.5], [33, 120, 180, 2.8], [38, 95, 140, 2.6], [44, 66, 100, 2.2],
+      [50, 105, 170, 3.0], [56, 70, 120, 2.3], [61, 90, 140, 2.6], [67, 65, 110, 2.0],
+      [73, 86, 150, 2.7], [80, 110, 180, 2.9], [87, 78, 120, 2.5], [93, 60, 100, 2.1]
+    ];
+    floresParams.forEach((f, idx) => {
+      const flor = document.createElement('div');
+      flor.className = 'flor';
+      flor.style.left = `${f[0]}vw`;
+      flor.style.setProperty('--tam-flor', `${f[1]}px`);
+      flor.style.setProperty('--tiempo-flor', `${f[3]}s`);
+      flor.innerHTML = `
+      <svg viewBox="0 0 80 180">
+        <!-- Tallo -->
+        <rect x="38" y="60" width="4" height="${f[2]}" rx="2" fill="var(--tallo)" />
+        <!-- Hojas -->
+        <ellipse cx="32" cy="90" rx="8" ry="24" fill="var(--hoja)" transform="rotate(-25 32 90)" opacity="0.8"/>
+        <ellipse cx="48" cy="120" rx="7" ry="22" fill="var(--hoja)" transform="rotate(18 48 120)" opacity="0.7"/>
+        <!-- Flor amarilla (pétalos) -->
+        <g>
+          ${Array.from({length: 7}, (_,i)=>`
+            <ellipse cx="40" cy="45" rx="14" ry="20"
+              fill="url(#petalo${idx})"
+              transform="rotate(${i*360/7} 40 45)" />
+            <defs>
+              <radialGradient id="petalo${idx}" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="var(--amarillo-brillo)" />
+                <stop offset="60%" stop-color="var(--amarillo-neon)" />
+                <stop offset="100%" stop-color="#fff200" />
+              </radialGradient>
+            </defs>
+          `).join('')}
+          <!-- Centro -->
+          <circle cx="40" cy="45" r="11"
+            fill="yellow"
+            stroke="#fff800"
+            stroke-width="3"
+            filter="url(#neon-centro${idx})"
+          />
+          <defs>
+            <filter id="neon-centro${idx}">
+              <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#fff93e"/>
+            </filter>
+          </defs>
+        </g>
+      </svg>
+      `;
+      floresDiv.appendChild(flor);
+    });
+
+    // Animar mariposas
+    function crearMariposa(num, colorAla, colorCuerpo) {
+      const mariposa = document.createElement('div');
+      mariposa.className = 'mariposa';
+      // Trayectorias variadas por mariposa
+      const trayectorias = [
+        [ '7vw', '18vh', '13vw', '10vh', '24vw', '24vh', '35vw', '12vh', '47vw', '21vh', '24vw', '29vh' ],
+        [ '63vw', '9vh', '70vw', '24vh', '80vw', '9vh', '90vw', '30vh', '80vw', '35vh', '60vw', '18vh' ],
+        [ '28vw', '37vh', '44vw', '21vh', '52vw', '31vh', '56vw', '8vh', '62vw', '33vh', '48vw', '16vh' ],
+        [ '88vw', '42vh', '77vw', '27vh', '93vw', '12vh', '81vw', '17vh', '72vw', '39vh', '90vw', '32vh' ]
+      ];
+      const t = trayectorias[num % trayectorias.length];
+      mariposa.style.setProperty('--x1', t[0]);
+      mariposa.style.setProperty('--y1', t[1]);
+      mariposa.style.setProperty('--x2', t[2]);
+      mariposa.style.setProperty('--y2', t[3]);
+      mariposa.style.setProperty('--x3', t[4]);
+      mariposa.style.setProperty('--y3', t[5]);
+      mariposa.style.setProperty('--x4', t[6]);
+      mariposa.style.setProperty('--y4', t[7]);
+      mariposa.style.setProperty('--x5', t[8]);
+      mariposa.style.setProperty('--y5', t[9]);
+      mariposa.style.setProperty('--x6', t[10]);
+      mariposa.style.setProperty('--y6', t[11]);
+      mariposa.style.animationDelay = `${num*1.7}s`;
+      mariposa.innerHTML = `
+        <svg viewBox="0 0 48 48">
+          <g>
+            <!-- Alas -->
+            <ellipse class="ala" cx="16" cy="18" rx="15" ry="12" fill="${colorAla}" opacity="0.96"/>
+            <ellipse class="ala" cx="32" cy="18" rx="15" ry="12" fill="${colorAla}" opacity="0.96"/>
+            <!-- Cuerpo -->
+            <rect x="22" y="18" width="4.5" height="17" rx="2.3" fill="${colorCuerpo}" />
+            <!-- Antenas -->
+            <path d="M24 18 Q23 11 16 8" stroke="#f4b800" stroke-width="1.7" fill="none"/>
+            <path d="M24 18 Q25 10 32 7" stroke="#f4b800" stroke-width="1.7" fill="none"/>
+            <!-- Cabeza -->
+            <ellipse cx="24" cy="17" rx="3.2" ry="3.7" fill="${colorCuerpo}" />
+          </g>
+        </svg>
+      `;
+      return mariposa;
+    }
+    const mariposasDiv = document.getElementById('mariposas');
+    for (let m=0; m<6; m++) {
+      mariposasDiv.appendChild(crearMariposa(m,
+        m%2 ? 'gold' : 'var(--mariposa-ala)',
+        m%2 ? 'orange' : 'var(--mariposa-cuerpo)'
+      ));
+    }
+  </script>
 </body>
 </html>
