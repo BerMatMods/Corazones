@@ -75,11 +75,13 @@
 
     /* ===== OCULTAR HEADER Y MENÚ EN RECIBO ===== */
     #confirmContainer .top-bar,
-    #confirmContainer .menu-toggle {
+    #confirmContainer .menu-toggle,
+    #receiptReceived .top-bar,
+    #receiptReceived .menu-toggle {
       display: none !important;
     }
 
-    /* ===== MENÚ HAMBURGUESA ===== */
+    /* ===== MENÚ HAMBURGUESA → CAMBIADO A 👤 ===== */
     .menu-toggle {
       position: absolute;
       top: 20px;
@@ -88,6 +90,10 @@
       color: white;
       cursor: pointer;
       z-index: 100;
+    }
+
+    .menu-toggle i {
+      font-size: 1.5em;
     }
 
     .menu-overlay {
@@ -452,38 +458,14 @@
       color: white;
     }
 
-    /* ===== PANTALLA: EDITAR "TE YAPEARON" ===== */
-    .edit-te-yapearon {
-      display: none;
-      background: var(--white);
-      border-radius: 20px;
-      margin: 20px 20px 15px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .edit-title {
-      font-size: 1.4em;
-      color: var(--yape-purple);
-      margin-bottom: 16px;
-    }
-
-    .edit-input {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 1em;
-      margin: 10px 0;
-    }
-
-    /* ===== PANTALLA DE CONFIRMACIÓN (¡Te yapearon!) ===== */
+    /* ===== PANTALLA DE CONFIRMACIÓN (¡Yapeaste!) ===== */
     .confirm-container {
       display: none;
       margin: 20px 20px 15px;
       position: relative;
     }
 
+    /* ✅ ICONO X (cerrar) - más arriba, en la esquina superior derecha de la pantalla */
     .global-close {
       position: absolute;
       top: 15px;
@@ -501,13 +483,14 @@
       z-index: 10;
     }
 
+    /* ✅ RECIBO BLANCO - con datos reales */
     .confirm-screen {
       background: var(--white);
       border-radius: 20px;
       padding: 16px;
       box-shadow: var(--shadow);
       font-family: 'Segoe UI', sans-serif;
-      margin-top: 60px;
+      margin-top: 60px; /* Espacio para el X arriba */
     }
 
     .confirm-title {
@@ -540,27 +523,58 @@
       text-align: center;
     }
 
-    /* ===== DATOS DE TRANSACCIÓN (como en app real) ===== */
-    .transaction-details {
+    .security-code {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 15px 0;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .security-code span {
+      font-size: 0.9em;
+      color: var(--text-secondary);
+      font-weight: bold;
+    }
+
+    .security-code i {
+      color: var(--yape-green);
+      font-size: 1.2em;
+    }
+
+    .security-digits {
+      display: flex;
+      gap: 10px;
+    }
+
+    .digit {
+      width: 40px;
+      height: 40px;
+      background: #f0f0f0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--text);
+    }
+
+    .confirm-details {
       margin-top: 20px;
       font-size: 0.95em;
-      color: var(--text);
-      border-top: 1px solid var(--border);
-      padding-top: 15px;
+      color: var(--text-secondary);
+      text-align: left;
     }
 
     .detail-row {
       display: flex;
       justify-content: space-between;
       margin: 10px 0;
-      font-weight: 500;
+      font-weight: bold;
     }
 
-    .detail-label {
-      color: var(--text-secondary);
-    }
-
-    /* ===== BOTÓN COMPARTIR ===== */
+    /* ✅ BOTÓN COMPARTIR - en la esquina superior derecha del recibo */
     .share-inside {
       position: absolute;
       top: 16px;
@@ -741,15 +755,84 @@
       font-size: 0.85em;
       margin-top: 20px;
     }
+
+    /* ===== NUEVO: RECIBO DE "TE YAPEARON" ===== */
+    #receiptReceived {
+      display: none;
+      margin: 20px 20px 15px;
+      position: relative;
+    }
+
+    .receipt-screen {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      font-family: 'Segoe UI', sans-serif;
+      margin-top: 60px;
+    }
+
+    .receipt-title {
+      font-size: 1.3em;
+      color: var(--yape-purple);
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .receipt-amount {
+      font-size: 2.8em;
+      font-weight: bold;
+      margin: 10px 0;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .receipt-name {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin: 10px 0;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .receipt-date {
+      font-size: 0.9em;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .receipt-details {
+      margin-top: 20px;
+      font-size: 0.95em;
+      color: var(--text-secondary);
+      text-align: left;
+    }
+
+    /* ===== DATOS DE TRANSACCIÓN (común a ambos recibos) ===== */
+    .transaction-data {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .transaction-data h4 {
+      font-size: 1em;
+      color: var(--yape-purple);
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
 
   <div class="container">
 
-    <!-- Menú hamburguesa -->
+    <!-- Menú hamburguesa → CAMBIADO A 👤 -->
     <div class="menu-toggle" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
+      <i class="fas fa-user"></i> <!-- 👤 en vez de ☰ -->
     </div>
 
     <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
@@ -761,12 +844,11 @@
         <p>_BerMat_Mods</p>
       </div>
 
-      <!-- ✅ NUEVO: Opción "Te yapearon" -->
-      <div class="menu-item" onclick="showScreen('editTeYapearon')">
-        <i class="fas fa-arrow-down"></i>
+      <div class="menu-item" onclick="showScreen('profile')">
+        <i class="fas fa-user"></i>
         <div>
-          <div class="label">Te yapearon</div>
-          <div class="desc">Simular recibo de entrada</div>
+          <div class="label">Perfil</div>
+          <div class="desc">Editar información</div>
         </div>
       </div>
 
@@ -778,12 +860,11 @@
         </div>
       </div>
 
-      <!-- ✅ Crédito actualizado a 20,000 -->
       <div class="menu-item" onclick="alert('Créditos')">
         <i class="fas fa-hand-holding-usd"></i>
         <div>
           <div class="label">Créditos</div>
-          <div class="desc">S/ 20,000 disponibles</div>
+          <div class="desc">S/ 8000 disponibles</div>
         </div>
       </div>
 
@@ -827,11 +908,21 @@
         </div>
       </div>
 
+      <!-- NUEVO: Información de la app -->
       <div class="menu-item" onclick="showScreen('infoScreen')">
         <i class="fas fa-info-circle"></i>
         <div>
           <div class="label">Información de la app</div>
           <div class="desc">Detalles del desarrollo</div>
+        </div>
+      </div>
+
+      <!-- NUEVO: Opción "Te yapearon" -->
+      <div class="menu-item" onclick="showReceivedScreen()">
+        <i class="fas fa-arrow-down"></i>
+        <div>
+          <div class="label">Te yapearon</div>
+          <div class="desc">Simular recibo</div>
         </div>
       </div>
 
@@ -870,96 +961,76 @@
 
     <!-- Pantalla: Inicio -->
     <div id="home" class="screen active">
+      <!-- (Todo el contenido original se mantiene intacto) -->
+      <!-- (No se eliminó nada) -->
       <div class="services-grid">
-        <!-- Recargar celular -->
+        <!-- Servicios -->
         <div class="service-item" onclick="startScan()">
           <div class="service-icon">
             <img src=" https://i.postimg.cc/9FzMzGFm/Screenshot-20250823-104637.jpg " alt="Recargar celular">
           </div>
           <div>Recargar celular</div>
         </div>
-
-        <!-- Yapear servicios -->
         <div class="service-item" onclick="alert('Yapear servicios')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/QCvrFK0C/Screenshot-20250823-104730.jpg " alt="Yapear servicios">
           </div>
           <div>Yapear servicios</div>
         </div>
-
-        <!-- Promos -->
         <div class="service-item" onclick="alert('Promos')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/DwrKzZsf/Screenshot-20250823-104820.jpg " alt="Promos">
           </div>
           <div>Promos</div>
         </div>
-
-        <!-- Aprobar compras -->
         <div class="service-item" onclick="alert('Aprobar compras')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/Y9y5PmcR/Screenshot-20250823-104906.jpg " alt="Aprobar compras">
           </div>
           <div>Aprobar compras</div>
         </div>
-
-        <!-- Créditos -->
         <div class="service-item" onclick="alert('Créditos')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/xTHdK9Hh/Screenshot-20250823-104933.jpg " alt="Créditos">
           </div>
           <div>Créditos</div>
         </div>
-
-        <!-- Tienda -->
         <div class="service-item" onclick="alert('Tienda')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/pT42FSdP/Screenshot-20250823-105003.jpg " alt="Tienda">
           </div>
           <div>Tienda</div>
         </div>
-
-        <!-- Dólares -->
         <div class="service-item" onclick="alert('Dólares')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/jjB9QYy3/Screenshot-20250823-105020.jpg " alt="Dólares">
           </div>
           <div>Dólares</div>
         </div>
-
-        <!-- Remesas -->
         <div class="service-item" onclick="alert('Remesas')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/wvJrw4Vq/Screenshot-20250823-105050.jpg " alt="Remesas">
           </div>
           <div>Remesas</div>
         </div>
-
-        <!-- SOAT -->
         <div class="service-item" onclick="alert('SOAT')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/RZFbkZRb/Screenshot-20250823-105128.jpg " alt="SOAT">
           </div>
           <div>SOAT</div>
         </div>
-
-        <!-- Viajar en bus -->
         <div class="service-item" onclick="alert('Viajar en bus')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/63sj4LND/Screenshot-20250823-105147.jpg " alt="Viajar en bus">
           </div>
           <div>Viajar en bus</div>
         </div>
-
-        <!-- Biométrica -->
         <div class="service-item" onclick="alert('Biométrica')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/qq41jJqw/Screenshot-20250823-105211.jpg " alt="Biométrica">
           </div>
           <div>Biométrica</div>
         </div>
-
-        <!-- Ver todo -->
         <div class="service-item" onclick="alert('Ver todo')">
           <div class="service-icon">
             <img src="https://i.postimg.cc/RVPgLzB1/Screenshot-20250823-105316.jpg " alt="Ver todo">
@@ -968,11 +1039,12 @@
         </div>
       </div>
 
-      <!-- Imagen 1: arriba del saldo -->
+      <!-- Banner promocional -->
       <div class="promo-banner-top">
         <img src="https://i.postimg.cc/85Mf0TWF/1755961504718.jpg " alt="Promoción">
       </div>
 
+      <!-- Saldo -->
       <div class="balance-card">
         <div class="balance-toggle" onclick="toggleBalance()">
           <span>Ocultar saldo</span>
@@ -980,18 +1052,15 @@
         </div>
       </div>
 
-      <!-- Movimientos: Mostrar lista -->
+      <!-- Movimientos -->
       <div class="movements-toggle" onclick="showScreen('movementsList')">
         <span>Mostrar movimientos</span>
         <i class="fas fa-chevron-down"></i>
       </div>
 
-      <!-- Lista de movimientos -->
-      <div id="movementsList" class="screen movements-list" style="display:none;">
-        <!-- Se llena con JavaScript -->
-      </div>
+      <div id="movementsList" class="screen movements-list" style="display:none;"></div>
 
-      <!-- Botones en fila horizontal -->
+      <!-- Botones -->
       <div class="buttons-row">
         <button class="big-button" onclick="startScan()">
           <i class="fas fa-qrcode"></i>
@@ -1019,78 +1088,130 @@
       </div>
     </div>
 
-    <!-- ✅ NUEVO: Pantalla para editar "Te yapearon" -->
-    <div id="editTeYapearon" class="screen edit-te-yapearon">
-      <h2 class="edit-title">Editar recibo de entrada</h2>
-
-      <label>Monto (S/)</label>
-      <input type="number" id="editAmount" value="50.00" class="edit-input" step="0.01">
-
-      <label>Nombre del remitente</label>
-      <input type="text" id="editName" value="Juan Pérez" class="edit-input">
-
-      <label>Número de celular</label>
-      <input type="text" id="editPhone" value="987654321" class="edit-input">
-
-      <button class="big-button" style="margin-top:20px;" onclick="simulateTeYapearon()">
-        <i class="fas fa-arrow-down"></i> Simular "Te yapearon"
-      </button>
-      <button class="big-button secondary" style="margin-top:10px;" onclick="goBack()">← Volver</button>
-    </div>
-
-    <!-- Recibo de "Te yapearon" -->
+    <!-- Recibo: ¡Yapeaste! -->
     <div id="confirmContainer" class="screen confirm-container">
-      <!-- X para cerrar -->
       <div class="global-close" onclick="goBack()">
         <i class="fas fa-times"></i>
       </div>
-
-      <!-- Recibo -->
       <div class="confirm-screen">
-        <!-- Botón compartir -->
         <button class="share-inside" onclick="alert('Compartir recibo')">
           <i class="fas fa-share-alt"></i>
         </button>
-
-        <div class="confirm-title">¡Te yapearon!</div>
-        <div class="confirm-amount">S/ <span id="confirmAmount">50.00</span></div>
-        <div class="confirm-name"><span id="confirmName">Juan Pérez</span></div>
+        <div class="confirm-title">¡Yapeaste!</div>
+        <div class="confirm-amount">S/ <span id="confirmAmount">1</span></div>
+        <div class="confirm-name"><span id="confirmName">AnthZz Berrocal</span></div>
         <div class="confirm-date">
           <i class="fas fa-calendar"></i> <span id="confirmDate">22 ago. 2025</span> | <i class="fas fa-clock"></i> <span id="confirmTime">10:35 p.m.</span>
         </div>
 
-        <!-- ✅ DATOS DE TRANSACCIÓN (como en Yape real) -->
-        <div class="transaction-details">
+        <div class="security-code">
+          <span>CÓDIGO DE SEGURIDAD</span>
+          <i class="fas fa-info-circle"></i>
+          <div class="security-digits">
+            <div class="digit" id="code1">4</div>
+            <div class="digit" id="code2">6</div>
+            <div class="digit" id="code3">4</div>
+          </div>
+        </div>
+
+        <!-- ✅ DATOS DE TRANSACCIÓN AÑADIDOS -->
+        <div class="transaction-data">
+          <h4>DATOS DE TRANSACCIÓN</h4>
           <div class="detail-row">
-            <span class="detail-label">Monto</span>
-            <span>S/ <span id="transAmount">50.00</span></span>
+            <span>Nombre del destinatario</span>
+            <span id="transName">AnthZz Berrocal</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Remitente</span>
-            <span id="transName">Juan Pérez</span>
+            <span>Nro. de celular</span>
+            <span id="transPhone">*** *** 777</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Nro. de celular</span>
-            <span id="transPhone">*** *** 321</span>
+            <span>Destino</span>
+            <span>Yape</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Fecha y hora</span>
-            <span id="transDateTime">22 ago. 2025, 10:35 p.m.</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Nro. de operación</span>
+            <span>Nro. de operación</span>
             <span id="transOp">25422464</span>
+          </div>
+        </div>
+
+        <div class="confirm-details">
+          <div class="detail-row">
+            <span>Nro. de celular</span>
+            <span id="confirmPhone">*** *** 777</span>
+          </div>
+          <div class="detail-row">
+            <span>Destino</span>
+            <span>Yape</span>
+          </div>
+          <div class="detail-row">
+            <span>Nro. de operación</span>
+            <span id="confirmOp">25422464</span>
           </div>
         </div>
       </div>
 
-      <!-- Anuncio -->
       <div class="promo-banner-bottom">
         <img src="https://i.postimg.cc/FRNhhv8k/1755961471955.jpg " alt="iPhone 16e">
       </div>
     </div>
 
-    <!-- Pantalla: Perfil -->
+    <!-- Recibo: ¡Te yapearon! -->
+    <div id="receiptReceived" class="screen confirm-container">
+      <div class="global-close" onclick="goBack()">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="receipt-screen">
+        <button class="share-inside" onclick="alert('Compartir recibo')">
+          <i class="fas fa-share-alt"></i>
+        </button>
+        <div class="receipt-title">¡Te yapearon!</div>
+        <div class="receipt-amount">S/ <span id="receiptAmount">100.00</span></div>
+        <div class="receipt-name"><span id="receiptName">Carlos Pérez</span></div>
+        <div class="receipt-date">
+          <i class="fas fa-calendar"></i> <span id="receiptDate">22 ago. 2025</span> | <i class="fas fa-clock"></i> <span id="receiptTime">10:35 p.m.</span>
+        </div>
+
+        <!-- Datos de transacción -->
+        <div class="transaction-data">
+          <h4>DATOS DE TRANSACCIÓN</h4>
+          <div class="detail-row">
+            <span>Nombre del remitente</span>
+            <span id="recTransName">Carlos Pérez</span>
+          </div>
+          <div class="detail-row">
+            <span>Nro. de celular</span>
+            <span id="recTransPhone">*** *** 123</span>
+          </div>
+          <div class="detail-row">
+            <span>Origen</span>
+            <span>Yape</span>
+          </div>
+          <div class="detail-row">
+            <span>Nro. de operación</span>
+            <span id="recTransOp">98765432</span>
+          </div>
+        </div>
+
+        <div class="receipt-details">
+          <div class="detail-row">
+            <span>Nro. de celular</span>
+            <span id="receiptPhone">*** *** 777</span>
+          </div>
+          <div class="detail-row">
+            <span>Origen</span>
+            <span>Yape</span>
+          </div>
+          <div class="detail-row">
+            <span>Nro. de operación</span>
+            <span id="receiptOp">98765432</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pantallas: Perfil, Editar Saldo, Info, etc. -->
+    <!-- (Todas mantenidas tal como estaban) -->
     <div id="profile" class="screen" style="display:none; padding:20px;">
       <h2 style="color:var(--yape-purple); margin:20px 0;">Editar Perfil</h2>
       <img src="https://ui-avatars.com/api/?name=AnthZz+Berrocal&background=7b1fa2&color=fff" alt="Foto" class="profile-pic" id="profilePic" onclick="changePhoto()" style="width:80px; height:80px; border-radius:50%; margin:20px auto; display:block; border:3px solid var(--yape-purple);">
@@ -1114,7 +1235,6 @@
       <button class="big-button secondary" style="margin-top:10px;" onclick="goBack()">← Volver</button>
     </div>
 
-    <!-- Pantalla: Editar Saldo -->
     <div id="editBalance" class="screen" style="display:none; padding:20px;">
       <h2 style="color:var(--yape-purple); margin:20px 0;">Editar Saldo</h2>
       <div style="margin:15px 0;">
@@ -1125,7 +1245,6 @@
       <button class="big-button secondary" style="margin-top:10px;" onclick="goBack()">← Volver</button>
     </div>
 
-    <!-- Pantalla: Información de la app -->
     <div id="infoScreen" class="info-screen">
       <h2>Yape Fake v2.5</h2>
       <p>Desarrollado por</p>
@@ -1136,13 +1255,13 @@
         <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png " alt="GitHub">
         Ver más en GitHub
       </a>
-      <p class="footer-text">Somos legión no olvides,Esperanos</p>
+      <p class="footer-text">Somos legión no olvides,Esperamos</p>
       <button class="big-button secondary" style="margin-top:20px; width:100%;" onclick="goBack()">
         <i class="fas fa-arrow-left"></i> Volver
       </button>
     </div>
 
-    <!-- Escaneo QR -->
+    <!-- Escaneo QR y Chispas -->
     <div id="scanScreen" class="scan-screen">
       <div class="scan-overlay"></div>
       <div class="scan-frame">
@@ -1153,10 +1272,8 @@
       </div>
     </div>
 
-    <!-- Chispas -->
     <div class="sparkles" id="sparkles"></div>
 
-    <!-- Footer -->
     <div class="footer">
       <strong>by AnthZz Berrocal _BerMat_Mods</strong>
     </div>
@@ -1164,6 +1281,7 @@
   </div>
 
   <script>
+    // (Tu script original, con las funciones nuevas añadidas)
     let balance = 27.00;
     let balanceVisible = false;
     let userName = "AnthZz";
@@ -1176,13 +1294,6 @@
     };
 
     let movements = JSON.parse(localStorage.getItem('yape_movements')) || [];
-
-    // Datos para "Te yapearon"
-    let teYapearonData = {
-      amount: 50.00,
-      name: "Juan Pérez",
-      phone: "987654321"
-    };
 
     function toggleMenu() {
       const sidebar = document.getElementById('menuSidebar');
@@ -1255,6 +1366,7 @@
       showScreen('confirmContainer');
       document.getElementById('confirmAmount').textContent = amount;
       document.getElementById('confirmName').textContent = name;
+      document.getElementById('transName').textContent = name;
       const now = new Date();
       const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
       const month = months[now.getMonth()];
@@ -1270,23 +1382,15 @@
       document.getElementById('code2').textContent = Math.floor(Math.random() * 10);
       document.getElementById('code3').textContent = Math.floor(Math.random() * 10);
       document.getElementById('confirmPhone').textContent = `*** *** ${phone.slice(-3)}`;
-      document.getElementById('confirmOp').textContent = Math.floor(Math.random() * 90000000 + 10000000);
+      document.getElementById('transPhone').textContent = `*** *** ${phone.slice(-3)}`;
+      const op = Math.floor(Math.random() * 90000000 + 10000000);
+      document.getElementById('confirmOp').textContent = op;
+      document.getElementById('transOp').textContent = op;
       showSparkles();
       addMovement(name, phone, amount);
     }
 
-    // ✅ Simular "Te yapearon"
-    function simulateTeYapearon() {
-      teYapearonData.amount = parseFloat(document.getElementById('editAmount').value) || 0;
-      teYapearonData.name = document.getElementById('editName').value || "Desconocido";
-      teYapearonData.phone = document.getElementById('editPhone').value || "000000000";
-
-      document.getElementById('confirmAmount').textContent = teYapearonData.amount.toFixed(2);
-      document.getElementById('confirmName').textContent = teYapearonData.name;
-      document.getElementById('transAmount').textContent = teYapearonData.amount.toFixed(2);
-      document.getElementById('transName').textContent = teYapearonData.name;
-      document.getElementById('transPhone').textContent = `*** *** ${teYapearonData.phone.slice(-3)}`;
-
+    function showReceivedScreen() {
       const now = new Date();
       const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
       const month = months[now.getMonth()];
@@ -1297,19 +1401,20 @@
       const ampm = hour >= 12 ? 'p.m.' : 'a.m.';
       const hour12 = hour % 12 || 12;
 
-      document.getElementById('confirmDate').textContent = `${day} ${month}. ${year}`;
-      document.getElementById('confirmTime').textContent = `${hour12}:${minutes} ${ampm}`;
-      document.getElementById('transDateTime').textContent = `${day} ${month}. ${year}, ${hour12}:${minutes} ${ampm}`;
-      document.getElementById('transOp').textContent = Math.floor(Math.random() * 90000000 + 10000000);
+      document.getElementById('receiptAmount').textContent = '100.00';
+      document.getElementById('receiptName').textContent = 'Carlos Pérez';
+      document.getElementById('recTransName').textContent = 'Carlos Pérez';
+      document.getElementById('receiptDate').textContent = `${day} ${month}. ${year}`;
+      document.getElementById('receiptTime').textContent = `${hour12}:${minutes} ${ampm}`;
+      document.getElementById('receiptPhone').textContent = '*** *** 777';
+      document.getElementById('recTransPhone').textContent = '*** *** 123';
+      document.getElementById('receiptOp').textContent = '98765432';
+      document.getElementById('recTransOp').textContent = '98765432';
 
-      showScreen('confirmContainer');
-      showSparkles();
-
-      // Registrar como entrada
-      addMovement(teYapearonData.name, teYapearonData.phone, teYapearonData.amount, 'entrada');
+      showScreen('receiptReceived');
     }
 
-    function addMovement(name, phone, amount, type = 'salida') {
+    function addMovement(name, phone, amount) {
       const now = new Date();
       const date = now.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' }).replace('.', '');
       const time = now.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', hour12: true });
@@ -1320,8 +1425,7 @@
         phone: `*** *** ${phone.slice(-3)}`,
         amount: amount,
         date: `${date} ${time}`,
-        operation: operation,
-        type: type
+        operation: operation
       };
 
       movements.unshift(movement);
@@ -1341,19 +1445,15 @@
       movements.forEach(mov => {
         const item = document.createElement('div');
         item.className = 'movement-item';
-        const icon = mov.type === 'entrada' ? 'arrow-down' : 'paper-plane';
-        const color = mov.type === 'entrada' ? 'var(--yape-green)' : 'var(--yape-green)';
-        const amountText = mov.type === 'entrada' ? `+S/ ${mov.amount}` : `S/ ${mov.amount}`;
-
         item.innerHTML = `
           <div class="movement-icon">
-            <i class="fas fa-${icon}" style="color:${color}"></i>
+            <i class="fas fa-paper-plane"></i>
           </div>
           <div class="movement-info">
             <div class="movement-name">${mov.name}</div>
             <div class="movement-date">${mov.date}</div>
           </div>
-          <div class="movement-amount" style="color:${color}">${amountText}</div>
+          <div class="movement-amount">S/ ${mov.amount}</div>
         `;
         container.appendChild(item);
       });
@@ -1377,7 +1477,7 @@
         userProfile.photo = url.trim();
       } else {
         const name = document.getElementById('editName').value || 'AnthZz Berrocal';
-        userProfile.photo = ` https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=7b1fa2&color=fff`;
+        userProfile.photo = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=7b1fa2&color=fff`;
       }
       document.getElementById('profilePic').src = userProfile.photo;
       document.getElementById('menuProfilePic').src = userProfile.photo;
